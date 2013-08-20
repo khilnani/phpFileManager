@@ -30,13 +30,12 @@ $user = '';  // change this to the username you would like to use
 $pass = ''; // change this too
 $maxfilesize = '5000000'; // max file size in bytes
 $hddspace = '100000000'; // max total size of all files in directory
-$hiddenfiles = array('.index.php.swp', '.htaccess'); // add any file names to this array which should remain invisible
+$hiddenfiles = array('admin', '.index.php.swp', '.htaccess'); // add any file names to this array which should remain invisible
 $editon = true; // make this = false if you dont want the to use the edit function at all
 $editextensions = array('htm','html','txt','css','js','less','jsp','xml'); // add the extensions of file types that you would like to be able to edit
 $makediron = true; // make this = false if you dont want to be able to make directories
 $newdirpermissions = 0700;
 $heading = 'File Manager';
-$downloadrate = 130000; // 130000 bytes per second typical download speed for working out download times
 $timezone = 'America/New_York';
 $path = '/Library/WebServer/Documents/';   // directory path, must end with a '/'
 
@@ -105,6 +104,7 @@ if(strpos($_REQUEST['delete'],'..') !== false) {
 if(strpos($_REQUEST['delete'],'/') !== false) {
 	exit;
 }
+
 
 if($loginrequired === true) { // check to see if they are logged in ---------------------------------------------------------
 	if($_SESSION['user'] != $user) {
@@ -249,14 +249,54 @@ if($showlogin === false) {
 		if(is_dir($path.$_REQUEST['pathext'].$_GET['delete'])) {
 			$result = @rmdir($path.$_REQUEST['pathext'].$_GET['delete']);
 			if($result == 0) {
-				$msg = "<span class='wf-error'>The folder could not be deleted. The folder must be empty before you can delete it. You also may not be authorised to delete this folder.</span><br />";
+				$msg = "<span class='wf-error'>The folder could not be deleted. The folder must be empty before you can delete it.</span><br />";
 			}
 		} else {
 			if(file_exists($path.$_REQUEST['pathext'].$_GET['delete'])) {
 				unlink($path.$_REQUEST['pathext'].$_GET['delete']);
 			}
 		}
+	}
+
+	if($_GET['rename'] != '') { // If rename link was clicked
+		if( file_exists($path.$_REQUEST['pathext'].$_GET['newname']) )
+		{
+			$msg = "<span class='wf-error'>Unable to rename '" . $_GET['rename'] . "'. '" . $_GET['newname'] . "' already exists.</span><br /> ";
+		}
+                else
+		{
+			$result = @rename ($path.$_REQUEST['pathext'].$_GET['rename'], $path.$_REQUEST['pathext'].$_GET['newname']);
+                        if($result == 0) 
+			{
+                                $msg = "<span class='wf-error'>The folder/file '" . $_GET['rename'] . "' could not be moved/renamed to '" . $_GET['newname'] . "' .</span><br />";
+                        }
+			else
+			{
+				$msg = "<span class='wf-error'>'" . $_GET['rename'] . "' successfully moved/renamed to '" . $_GET['newname'] . "' .</span><br />";
+			}
+		}
+
+
+
 	} 
+
+        if($_GET['unzip'] != '') { // If rename link was clicked
+                if( file_exists($path.$_REQUEST['pathext'].$_GET['newname']) )
+                {
+                        $msg = "<span class='wf-error'>The file '" . $_GET['newname'] . "' already exists.</span><br /> ";
+                }
+                else
+                {
+			if (!@exec("unzip -n ". $path.$_REQUEST['pathext'].$_GET['unzip'] ." -d ". $path.$_REQUEST['pathext'].$_GET['newname'])) {
+				$msg = "<span class='wf-error'>'" . $_GET['unzip'] . "' successfully unzipped to '" . $_GET['newname'] . "' .</span><br />";
+			} else {
+				$msg = "<span class='wf-error'>'" . $_GET['unzip'] . "' could not be unzipped to '" . $_GET['newname'] . "' .</span><br />";
+			}
+                }
+
+
+
+        }
 
 	if($_POST['mkdir'] != '' && $makediron === true) { // if the make directory button was clicked ------------------------------------------------------
 		if(strpos($path.$_REQUEST['pathext'].$_POST['dirname'],'//') === false ) {
@@ -312,8 +352,8 @@ if($showlogin === false) {
 		<td><span class='wf-headingrow'>&nbsp;FILENAME&nbsp;</span></td>
 		<td><span class='wf-headingrow'>&nbsp;TYPE&nbsp;</span></td>
 		<td><span class='wf-headingrow'>&nbsp;SIZE&nbsp;</span></td>
-		<td><span class='wf-headingrow'>&nbsp;D/L TIME (DSL)&nbsp;</span></td>
 		<td><span class='wf-headingrow'>&nbsp;LAST MODIFIED&nbsp;</span></td>
+		<td>&nbsp;</td>
 		<td>&nbsp;</td>
 		<td>&nbsp;</td>
 		<td>&nbsp;</td>
@@ -390,10 +430,15 @@ if($showlogin === false) {
 
 
 						// create some html for a link to download files 
-						$downloadlink = "<a href='./$_REQUEST[pathext]$encodedfile'>VIEW/DOWNLOAD</a>";
+						$downloadlink = "<a href='./$_REQUEST[pathext]$encodedfile'>VIEW</a>";
 
 						// create some html for a link to delete files 
 						$deletelink = "<a href=\"javascript:var c=confirm('Delete \'" . $encodedfile  . "\' ?'); if(c) document.location='$_SERVER[PHP_SELF]?delete=$encodedfile&amp;u=$_REQUEST[u]&amp;pathext=$_REQUEST[pathext]'\">DELETE</a>";
+
+                                                $renamelink = "<a href=\"javascript:var c=prompt('Rename \'" . $encodedfile  . "\' to'); if(c) document.location='$_SERVER[PHP_SELF]?rename=$encodedfile&amp;newname=' + c + '&amp;u=$_REQUEST[u]&amp;pathext=$_REQUEST[pathext]'\">RENAME</a>";
+
+						$unziplink = "<a href=\"javascript:var c=prompt('Unzip \'" . $encodedfile  . "\' to'); if(c) document.location='$_SERVER[PHP_SELF]?unzip=$encodedfile&amp;newname=' + c + '&amp;u=$_REQUEST[u]&amp;pathext=$_REQUEST[pathext]'\">UNZIP</a>";
+
 
 						// if it is a directory change the file name to a directory link
 						if(is_dir($path.$_REQUEST['pathext'].$file)) {
@@ -401,33 +446,25 @@ if($showlogin === false) {
 							$fileicon = "&nbsp;" . $foldericonImage . "&nbsp;";
 							$downloadlink = '';
 							$filedata[7] = '';
-							$downloadtime = '';
 							$modified = '';
 							$filetype = '';
 							if($makediron === false) {
 								$deletelink = '';
 							}
+							$tmpeditlink = "";
 						} else {
 							$filename = $file;
 							$fileicon = "&nbsp;" . $fileiconImage . "&nbsp;";
 
 							$pathparts = pathinfo($file);
-							$filetype = $type[$pathparts['extension']];
+							$filetype = $type[ strtolower($pathparts['extension']) ];
+
+                                                	if( strtolower( $pathparts['extension'] ) == 'zip') {
+                                                        	$tmpeditlink = $unziplink;
+                                                	}
 
 							$modified = date('d-M-y g:ia',$filedata[9]);
 
-							$downloadtime = round($filedata[7]/$downloadrate)+1;
-							if($downloadtime > 59) {
-								$downloadtime = round($downloadtime/60);
-								if($downloadtime > 59) {
-									$downloadtime = round($downloadtime/60);
-									$downloadtime = $downloadtime.' hrs';
-								} else {
-									$downloadtime = $downloadtime.' min';
-								}
-							} else {
-								$downloadtime = $downloadtime.' sec';
-							}
 
 							if($filedata[7] > 1024) {
 								$filedata[7] = round($filedata[7]/1024);
@@ -461,11 +498,11 @@ if($showlogin === false) {
 						<td class='wf-darkcolumn'>&nbsp;<span class='wt-text'>$filename</span>&nbsp;</td>
 						<td class='wf-lightcolumn'>&nbsp;<span class='wt-text'>$filetype</span>&nbsp;</td>
 						<td class='wf-darkcolumn'>&nbsp;<span class='wt-text'>$filedata[7]</span>&nbsp;</td>
-						<td class='wf-lightcolumn'>&nbsp;<span class='wt-text'>$downloadtime</span>&nbsp;</td>
-						<td class='wf-darkcolumn'>&nbsp;<span class='wt-text'>$modified</span>&nbsp;</td>
-						<td class='wf-lightcolumn'>&nbsp;$downloadlink&nbsp;</td>
-						<td class='wf-darkcolumn'>&nbsp;$deletelink&nbsp;</td>
-						<td class='wf-lightcolumn'>$editlink</td>
+						<td class='wf-lightcolumn'>&nbsp;<span class='wt-text'>$modified</span>&nbsp;</td>
+						<td class='wf-darkcolumn'>&nbsp;$downloadlink&nbsp;</td>
+						<td class='wf-lightcolumn'>&nbsp;$deletelink&nbsp;</td>
+						<td class='wf-darkcolumn'>$tmpeditlink</td>
+						<td class='wf-lightcolumn'>$renamelink</td>
 						</tr>
 						<tr class='wf-darkline'> 
 						<td colspan='9' height='1'></td>
@@ -479,6 +516,7 @@ if($showlogin === false) {
 	}
 
 }
+
 
 function dirsize($dir) {
 // calculate the size of files in $dir
