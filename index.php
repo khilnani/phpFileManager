@@ -25,19 +25,23 @@
 */
 
 // set these configuration variables
-$loginrequired = true; // change this to false if you dont want to use authentication
-$user = '';  // change this to the username you would like to use
-$pass = ''; // change this too
 $maxfilesize = '5000000'; // max file size in bytes
 $hddspace = '100000000'; // max total size of all files in directory
-$hiddenfiles = array('admin', '.index.php.swp', '.htaccess'); // add any file names to this array which should remain invisible
-$editon = true; // make this = false if you dont want the to use the edit function at all
-$editextensions = array('htm','html','txt','css','js','less','jsp','xml'); // add the extensions of file types that you would like to be able to edit
-$makediron = true; // make this = false if you dont want to be able to make directories
 $newdirpermissions = 0700;
-$heading = 'File Manager';
-$timezone = 'America/New_York';
-$path = '/Library/WebServer/Documents/';   // directory path, must end with a '/'
+
+$ini = parse_ini_file("./config.ini");
+
+$loginrequired = ($ini['loginRequired'] == 1);  // change this to false if you dont want to use authentication
+$user = $ini['userName'];
+$pass = $ini['password'];
+$editextensions = $ini['editFileExtensions']; // add the extensions of file types that you would like to be able to edit
+$hiddenfiles = $ini['hiddenFiles'];    // add any file names to this array which should remain invisible
+$editon = ($ini['editFile'] == 1);     // make this = false if you dont want the to use the edit function at all
+$makediron = ($ini['makeDir'] == 1);  // make this = false if you dont want to be able to make directories
+$heading = $ini['heading'];
+$timezone = $ini['timezone'];
+$path = $ini['basepath'];  // directory path, must end with a '/'
+
 
 $arrowiconImage = "<img alt='Back' src='data:image/gif;base64,R0lGODlhCgALAJECALS0tAAAAP///wAAACH5BAEAAAIALAAAAAAKAAsAAAIblBOmB5AbWnsiynnQRBCv6nUOwoGXw5wPyQYFADs=' />";
 $fileiconImage = "<img alt='' src='data:image/gif;base64,R0lGODlhCwANAJECAAAAAP///////wAAACH5BAEAAAIALAAAAAALAA0AAAIchG+iEO0pmGsMxEkRnmY/6XVeIIbgVqInhrRHAQA7' />";
@@ -422,7 +426,7 @@ if($showlogin === false) {
 							foreach($editextensions as $editext) {
 
 								$ext = substr($file, ($dotpos+1));
-								if(strcmp($ext, $editext) == 0) {
+								if(strcmp( strtolower( $ext ) , $editext) == 0) {
 									$editlink = "&nbsp;<a href='$_SERVER[PHP_SELF]?edit=$encodedfile&amp;u=$_REQUEST[u]&amp;pathext=$_REQUEST[pathext]'>EDIT</a>&nbsp;";
 								}
 							}
@@ -458,6 +462,8 @@ if($showlogin === false) {
 
 							$pathparts = pathinfo($file);
 							$filetype = $type[ strtolower($pathparts['extension']) ];
+
+							$tmpeditlink = $editlink;
 
                                                 	if( strtolower( $pathparts['extension'] ) == 'zip') {
                                                         	$tmpeditlink = $unziplink;
@@ -501,8 +507,8 @@ if($showlogin === false) {
 						<td class='wf-lightcolumn'>&nbsp;<span class='wt-text'>$modified</span>&nbsp;</td>
 						<td class='wf-darkcolumn'>&nbsp;$downloadlink&nbsp;</td>
 						<td class='wf-lightcolumn'>&nbsp;$deletelink&nbsp;</td>
-						<td class='wf-darkcolumn'>$tmpeditlink</td>
-						<td class='wf-lightcolumn'>$renamelink</td>
+						<td class='wf-darkcolumn'>&nbsp;$tmpeditlink&nbsp;</td>
+						<td class='wf-lightcolumn'>&nbsp;$renamelink&nbsp;</td>
 						</tr>
 						<tr class='wf-darkline'> 
 						<td colspan='9' height='1'></td>
@@ -575,5 +581,7 @@ td.wf-darkcolumn { background: #eeeeee; font-family : Verdana, Arial; font-size 
 </head>
 <body bgcolor="#FFFFFF">
 <?php echo $filemanager?>
+
+<?php echo $ini['loginrequired']?>
 </body>
 </html>
