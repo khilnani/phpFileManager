@@ -264,7 +264,11 @@ if($showlogin === false) {
 	}
 
 	if($_GET['rename'] != '') { // If rename link was clicked
-		if( file_exists($path.$_REQUEST['pathext'].$_GET['newname']) )
+                if( trim($_GET['newname']) == "" ) 
+                {
+                        $msg = "<span class='wf-error'>Unable to rename. Invalid filename '" . $_GET['newname'] . "'.</span><br /> ";
+                }
+		elseif( file_exists($path.$_REQUEST['pathext'].$_GET['newname']) )
 		{
 			$msg = "<span class='wf-error'>Unable to rename '" . $_GET['rename'] . "'. '" . $_GET['newname'] . "' already exists.</span><br /> ";
 		}
@@ -286,7 +290,11 @@ if($showlogin === false) {
 	} 
 
         if($_GET['unzip'] != '') { // If rename link was clicked
-                if( file_exists($path.$_REQUEST['pathext'].$_GET['newname']) )
+                if( trim($_GET['newname']) == "" ) 
+		{
+			$msg = "<span class='wf-error'>Unable to unzip. Invalid filename '" . $_GET['newname'] . "'.</span><br /> ";
+		}
+		elseif( file_exists($path.$_REQUEST['pathext'].$_GET['newname']) )
                 {
                         $msg = "<span class='wf-error'>The file '" . $_GET['newname'] . "' already exists.</span><br /> ";
                 }
