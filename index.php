@@ -581,7 +581,5 @@ td.wf-darkcolumn { background: #eeeeee; font-family : Verdana, Arial; font-size 
 </head>
 <body bgcolor="#FFFFFF">
 <?php echo $filemanager?>
-
-<?php echo $ini['loginrequired']?>
 </body>
 </html>
