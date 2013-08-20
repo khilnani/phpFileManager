@@ -37,7 +37,7 @@ $makediron = true; // make this = false if you dont want to be able to make dire
 $newdirpermissions = 0700;
 $heading = 'File Manager';
 $downloadrate = 130000; // 130000 bytes per second typical download speed for working out download times
-$timezone = '';
+$timezone = 'America/New_York';
 
 $arrowiconImage = "<img alt='Back' src='data:image/gif;base64,R0lGODlhCgALAJECALS0tAAAAP///wAAACH5BAEAAAIALAAAAAAKAAsAAAIblBOmB5AbWnsiynnQRBCv6nUOwoGXw5wPyQYFADs=' />";
 $fileiconImage = "<img alt='' src='data:image/gif;base64,R0lGODlhCwANAJECAAAAAP///////wAAACH5BAEAAAIALAAAAAALAA0AAAIchG+iEO0pmGsMxEkRnmY/6XVeIIbgVqInhrRHAQA7' />";
@@ -165,7 +165,7 @@ if($showlogin === false) {
 			@closedir($dir);
 		}
 	}
-	
+
 	if($_GET['back'] != '') { // if the back link was clicked ---------------------------------------------------------------------
 		$_REQUEST['pathext'] = substr($_REQUEST['pathext'],0,-1);
 		$slashpos = strrpos($_REQUEST['pathext'],'/');
@@ -175,14 +175,14 @@ if($showlogin === false) {
 			$_REQUEST['pathext'] = substr($_REQUEST['pathext'],0,$slashpos+1);
 		}
 	}
-	
-	
+
+
 	if($_GET['edit'] != '') { // if an edit link was clicked ----------------------------------------------------------------------
-	
+
 		$fp = fopen($path.$_REQUEST['pathext'].$_GET['edit'], "r");
 		$oldcontent = fread($fp, filesize($path.$_REQUEST['pathext'].$_GET['edit']));
 		fclose($fp);
-		
+
 		$filemanager = "
 		<center>
 		<table class='wf' border='0' cellspacing='0' cellpadding='20' width='100%'>
@@ -206,22 +206,22 @@ if($showlogin === false) {
 		</table>
 		</center>
 		";
-		
+
 	}
-	
+
 	if ($_POST['upload'] != '') { // if the upload button was pressed --------------------------------------------------------------------------
-		
+
 		if($_FILES['uploadedfile']['name'] != '') { // if a file was actually uploaded 
-			
+
 			$_FILES['uploadedfile']['name'] = str_replace('%','',$_FILES['uploadedfile']['name']);  // remove any % signs from the file name
 			// if the file size is within allowed limits
-			
+
 			if($_FILES['uploadedfile']['size'] > 0 && $_FILES['uploadedfile']['size'] < $maxfilesize) {
-			
+
 				// if adding the file will not exceed the maximum allowed total
 				$hddtotal = dirsize($path); // get the total size of all files in the directory including any sub directorys
 				if(($hddtotal + $_FILES['uploadedfile']['size']) < $hddspace) {
-				
+
 					// put the file in the directory
 					move_uploaded_file($_FILES['uploadedfile']['tmp_name'], $path.$_REQUEST['pathext'].$_FILES['uploadedfile']['name']);	
 				} else {
@@ -235,16 +235,16 @@ if($showlogin === false) {
 			$msg =  "<span class='wf-error'>Please press the browse button and select a file to upload before you press the upload button.</span><br />";
 		}
 	}
-		
+
 	if($_POST['save']) { // if the save button was pressed on the edit screen -------------------------------------------------------------------------
 		$newcontent = stripslashes($newcontent);
 		$fp = fopen($path.$_REQUEST['pathext'].$_POST['savefile'], "w");
 		fwrite($fp, $newcontent);
 		fclose($fp);
 	}
-	
+
 	if($_GET['delete'] != '') { // if the delete link was clicked -------------------------------------------------------------------------------------
-	
+
 		// delete the file or directory
 		if(is_dir($path.$_REQUEST['pathext'].$_GET['delete'])) {
 			$result = @rmdir($path.$_REQUEST['pathext'].$_GET['delete']);
@@ -257,7 +257,7 @@ if($showlogin === false) {
 			}
 		}
 	} 
-	
+
 	if($_POST['mkdir'] != '' && $makediron === true) { // if the make directory button was clicked ------------------------------------------------------
 		if(strpos($path.$_REQUEST['pathext'].$_POST['dirname'],'//') === false ) {
 			$result = @mkdir($path.$_REQUEST['pathext'].$_POST['dirname'], $newdirpermissions);
@@ -272,19 +272,19 @@ if($showlogin === false) {
 				$msg = "<span class='wf-error'> Requested directory name '" . $_POST['dirname'] . "' failed validation.</span><br />";
 		}
 	}
-	
+
 	if($filemanager == '') { // show the main screen -----------------------------------------------------------------------------------------------------
 		$hddtotal = dirsize($path); // get the total size of all files in the directory including any sub directorys
 		$freespace = round(($hddspace - $hddtotal)/1000); // work out how much free space is left
 		$hddtotal = round($hddtotal/1000); // convert to Kb instead of bytes
 		$hddspace = round($hddspace/1000); // convert to Kb instead of bytes
 		$maxfilesizekb = round($maxfilesize/1000); // convert to Kb instead of bytes
-	
+
 		// if $makediron has been set to on show some html for making directories
 		if($makediron === true) {
 			$mkdirhtml = "<input type='text' name='dirname' size='15' /><input type='submit' name='mkdir' value='Make Directory' />";
 		}
-		
+
 		// build the html that makes up the file manager
 		// the $filemanager variable holds the first part of the html
 		// including the form tags and the top 2 heading rows of the table which
@@ -321,7 +321,7 @@ if($showlogin === false) {
 		<tr class='wf-line'> 
 		<td colspan='9' height='2'></td>
 		</tr>";
-	
+
 	// if the current directory is a sub directory show a back link to get back to the previous directory
 		if($_REQUEST['pathext'] != '') {
 			$filemanager  .= "
@@ -340,7 +340,7 @@ if($showlogin === false) {
 			<td colspan='9' height='1'></td>
 			</tr>";
 		}
-	
+
 		// build the table rows which contain the file information
 		$newpath = substr($path.$_REQUEST['pathext'], 0, -1);   // remove the forward or backwards slash from the path
 		$dir = @opendir($newpath); // open the directory
@@ -348,9 +348,9 @@ if($showlogin === false) {
 			$filearray[] = $file;
 		}
 		natcasesort($filearray);
-		
+
 		foreach($filearray as $key => $file) {
-		
+
 			// check to see if the file is a directory and if it can be opened, if not hide it
 			$hiddendir = 0;
 			if(is_dir($path.$_REQUEST['pathext'].$file)) {
@@ -358,43 +358,43 @@ if($showlogin === false) {
 				if($tempdir == false) { $hiddendir = 1;}
 				@closedir($tempdir);
 			}
-			
+
 			// if the name is not a directory and the name is not the name of this program file 
 			if($file != '.' && $file != '..' && $file != $thisfilename && $hiddendir != 1) {
 				$match = false;
 				foreach($hiddenfiles as $name) { // for each value in the hidden files array
-				
+
 					if($file == $name) { // check the name is not the same as the hidden file name
 						$match = true;	 // set a flag if this name is supposed to be hidden
 					}
 				}	
-				
+
 				if($match === false) { // if there were no matches the file should not be hidden
-					
+
 						$filedata = stat($path.$_REQUEST['pathext'].$file); // get some info about the file
 						$encodedfile = rawurlencode($file);
-						
+
 						// find out if the file is one that can be edited
 						$editlink = '';
 						if($editon === true && !is_dir($path.$_REQUEST['pathext'].$file)) { // if the edit function is turned on and the file is not a directory
-						
+
 							$dotpos = strrpos($file,'.');
 							foreach($editextensions as $editext) {
-							
+
 								$ext = substr($file, ($dotpos+1));
 								if(strcmp($ext, $editext) == 0) {
 									$editlink = "&nbsp;<a href='$_SERVER[PHP_SELF]?edit=$encodedfile&amp;u=$_REQUEST[u]&amp;pathext=$_REQUEST[pathext]'>EDIT</a>&nbsp;";
 								}
 							}
 						}
-						
+
 
 						// create some html for a link to download files 
 						$downloadlink = "<a href='./$_REQUEST[pathext]$encodedfile'>VIEW/DOWNLOAD</a>";
 
 						// create some html for a link to delete files 
 						$deletelink = "<a href=\"javascript:var c=confirm('Delete \'" . $encodedfile  . "\' ?'); if(c) document.location='$_SERVER[PHP_SELF]?delete=$encodedfile&amp;u=$_REQUEST[u]&amp;pathext=$_REQUEST[pathext]'\">DELETE</a>";
-						
+
 						// if it is a directory change the file name to a directory link
 						if(is_dir($path.$_REQUEST['pathext'].$file)) {
 							$filename = "<a href='$_SERVER[PHP_SELF]?u=$_REQUEST[u]&amp;pathext=$_REQUEST[pathext]$encodedfile/'>$file</a>";
@@ -410,12 +410,12 @@ if($showlogin === false) {
 						} else {
 							$filename = $file;
 							$fileicon = "&nbsp;" . $fileiconImage . "&nbsp;";
-							
+
 							$pathparts = pathinfo($file);
 							$filetype = $type[$pathparts['extension']];
-							
+
 							$modified = date('d-M-y g:ia',$filedata[9]);
-							
+
 							$downloadtime = round($filedata[7]/$downloadrate)+1;
 							if($downloadtime > 59) {
 								$downloadtime = round($downloadtime/60);
@@ -428,7 +428,7 @@ if($showlogin === false) {
 							} else {
 								$downloadtime = $downloadtime.' sec';
 							}
-							
+
 							if($filedata[7] > 1024) {
 								$filedata[7] = round($filedata[7]/1024);
 								if($filedata[7] > 1024) {
@@ -451,10 +451,10 @@ if($showlogin === false) {
 								$filedata[7] = $filedata[7].'b';
 							}
 						}
-						
+
 						// append 2 table rows to the $content variable, the first row has the file
 						// informtation, the 2nd row makes a black line 1 pixel high
-						
+
 						$content .= "
 						<tr>
 						<td class='wf-lightcolumn'>$fileicon</td>
@@ -486,14 +486,14 @@ function dirsize($dir) {
 	$dh = @opendir($dir);
 	$size = 0;
 	if($dh != false) { // dont go into this loop if the dir was not opened successfully
-	
+
 		while (($file = readdir($dh)) !== false) {
-		
+
 			if ($file != '.' and $file != '..') {
-			
+
 				$path = $dir.'/'.$file;
 				if (is_dir($path)) {
-				
+
 					$size += dirsize("$path/");
 				} elseif (is_file($path)) {
 					$size += filesize($path);
