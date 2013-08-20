@@ -30,7 +30,7 @@ $user = '';  // change this to the username you would like to use
 $pass = ''; // change this too
 $maxfilesize = '5000000'; // max file size in bytes
 $hddspace = '100000000'; // max total size of all files in directory
-$hiddenfiles = array('.index.php.swp', '.htaccess','fileicon.gif','foldericon.gif','arrowicon.gif','LICENSE.txt'); // add any file names to this array which should remain invisible
+$hiddenfiles = array('.index.php.swp', '.htaccess'); // add any file names to this array which should remain invisible
 $editon = true; // make this = false if you dont want the to use the edit function at all
 $editextensions = array('htm','html','txt','css','js','less','jsp','xml'); // add the extensions of file types that you would like to be able to edit
 $makediron = true; // make this = false if you dont want to be able to make directories
@@ -38,6 +38,11 @@ $newdirpermissions = 0700;
 $heading = 'File Manager';
 $downloadrate = 130000; // 130000 bytes per second typical download speed for working out download times
 $timezone = '';
+
+$arrowiconImage = "<img alt='Back' src='data:image/gif;base64,R0lGODlhCgALAJECALS0tAAAAP///wAAACH5BAEAAAIALAAAAAAKAAsAAAIblBOmB5AbWnsiynnQRBCv6nUOwoGXw5wPyQYFADs=' />";
+$fileiconImage = "<img alt='' src='data:image/gif;base64,R0lGODlhCwANAJECAAAAAP///////wAAACH5BAEAAAIALAAAAAALAA0AAAIchG+iEO0pmGsMxEkRnmY/6XVeIIbgVqInhrRHAQA7' />";
+$foldericonImage = "<img alt='' src='data:image/gif;base64,R0lGODlhDwANAKIGAMfHx5eXlwAAAEhISOfn5+/v7////wAAACH5BAEAAAYALAAAAAAPAA0AAAM0aDbMohCOQggA48UVug9Ns1RkWQGBMFhX66Iq+7rpOr+1fMP2fuW+XyzI+xg/D4FyyWQmAAA7' />";
+
 
 $type['jpg'] = 'Image';
 $type['jpeg'] = 'Image';
@@ -321,7 +326,7 @@ if($showlogin === false) {
 		if($_REQUEST['pathext'] != '') {
 			$filemanager  .= "
 			<tr>
-			<td class='wf-lightcolumn'>&nbsp;<img src='arrowicon.gif' alt='back icon' />&nbsp;</td>
+			<td class='wf-lightcolumn'>&nbsp;" . $arrowiconImage . "&nbsp;</td>
 			<td class='wf-darkcolumn'>&nbsp;<a href='$_SERVER[PHP_SELF]?u=$_REQUEST[u]&amp;back=1&amp;pathext=$_REQUEST[pathext]'>&laquo;BACK</a>&nbsp;</td>
 			<td class='wf-lightcolumn'></td>
 			<td class='wf-darkcolumn'></td>
@@ -393,7 +398,7 @@ if($showlogin === false) {
 						// if it is a directory change the file name to a directory link
 						if(is_dir($path.$_REQUEST['pathext'].$file)) {
 							$filename = "<a href='$_SERVER[PHP_SELF]?u=$_REQUEST[u]&amp;pathext=$_REQUEST[pathext]$encodedfile/'>$file</a>";
-							$fileicon = "&nbsp;<img src='foldericon.gif' alt='folder icon' />&nbsp;";
+							$fileicon = "&nbsp;" . $foldericonImage . "&nbsp;";
 							$downloadlink = '';
 							$filedata[7] = '';
 							$downloadtime = '';
@@ -404,7 +409,7 @@ if($showlogin === false) {
 							}
 						} else {
 							$filename = $file;
-							$fileicon = "&nbsp;<img src='fileicon.gif' alt='file icon' />&nbsp;";
+							$fileicon = "&nbsp;" . $fileiconImage . ">&nbsp;";
 							
 							$pathparts = pathinfo($file);
 							$filetype = $type[$pathparts['extension']];
