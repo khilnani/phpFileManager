@@ -18,6 +18,7 @@ Notes
 
 History
 ===============
+- Converted images to base64 and embedded in index.php.
 - Added a success message when creating new folders.
 - Update Folder creation error messages to include the folder name.
 - Changed fault directory name validation check for ".". Added "/" check.
