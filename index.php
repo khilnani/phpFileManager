@@ -192,10 +192,11 @@ if($showlogin === false) {
 		<table class='wf' border='0' cellspacing='0' cellpadding='20' width='100%'>
 		<tr>
 		<td>
-		<span class='wf-heading'>$heading</span><br />
+		<span class='wf-heading'>$heading</span><br /><br />
 		<form name='form1' method='post' action='$_SERVER[PHP_SELF]'>
 			  <center>
-				<textarea name='newcontent' cols='45' rows='15'>$oldcontent</textarea>
+				<span>Edit: '" . $_REQUEST['pathext'].$_GET['edit'] . "'</span><br />
+				<textarea name='newcontent' class='textarea'>$oldcontent</textarea>
 				<br />
 				<br />
 				<input type='submit' name='save' value='Save'/>
@@ -434,7 +435,7 @@ if($showlogin === false) {
 
 
 						// create some html for a link to download files 
-						$downloadlink = "<a href='./$_REQUEST[pathext]$encodedfile' target='_blank'>VIEW</a>";
+						$downloadlink = "<a href='" . fixViewPath($path,$_REQUEST[pathext],  $encodedfile) . "' target='_blank'>VIEW</a>";
 
 						// create some html for a link to delete files 
 						$deletelink = "<a href=\"javascript:var c=confirm('Delete \'" . $encodedfile  . "\' ?'); if(c) document.location='$_SERVER[PHP_SELF]?delete=$encodedfile&amp;u=$_REQUEST[u]&amp;pathext=$_REQUEST[pathext]'\">DELETE</a>";
@@ -549,6 +550,16 @@ function dirsize($dir) {
 	return $size;
 }
 
+function fixViewPath($path, $dir, $file) {
+	$count = substr_count( str_replace($path,"/",dirname(__FILE__)), "/");
+	$relpath = "";
+	for($i=0; $i < $count; $i++)
+	{
+		$relpath .= "../";
+	}
+	$relpath .= $dir . $file;
+	return $relpath;
+}
 ?>
 
 
@@ -577,6 +588,8 @@ tr.wf-line { background: #999999; }
 tr.wf-darkline { background: #000000; }
 td.wf-lightcolumn { background: #ffffff; font-family : Verdana, Arial; font-size : 13px; font-weight: normal; color: #333333; height: 20px; }
 td.wf-darkcolumn { background: #eeeeee; font-family : Verdana, Arial; font-size : 13px; font-weight: normal; color: #333333; height: 20px;}
+.textarea { width:90%; height: 600px; padding: 10px; margin: 10px; border: 1px solid #ccc; }
+
 </style>
 </head>
 <body bgcolor="#FFFFFF">
