@@ -430,7 +430,7 @@ if($showlogin === false) {
 
 
 						// create some html for a link to download files 
-						$downloadlink = "<a href='./$_REQUEST[pathext]$encodedfile'>VIEW</a>";
+						$downloadlink = "<a href='./$_REQUEST[pathext]$encodedfile' target='_blank'>VIEW</a>";
 
 						// create some html for a link to delete files 
 						$deletelink = "<a href=\"javascript:var c=confirm('Delete \'" . $encodedfile  . "\' ?'); if(c) document.location='$_SERVER[PHP_SELF]?delete=$encodedfile&amp;u=$_REQUEST[u]&amp;pathext=$_REQUEST[pathext]'\">DELETE</a>";
