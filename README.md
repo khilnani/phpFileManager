@@ -16,6 +16,8 @@ Notes
 
 History
 ===============
+- Added a success message when creating new folders.
+- Update Folder creation error messages to include the folder name.
 - Changed fault directory name validation check for ".". Added "/" check.
 - Added a JavaScript confirmation popup when deleting files/folders.
 - Merged the originally seperate 'styles.css' into 'index.php' to avoid including 'styles.css' in the do not show list.
