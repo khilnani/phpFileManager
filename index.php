@@ -137,7 +137,7 @@ if($_POST['login']) { // if the login button has been pressed ------------------
 
 if($showlogin === true) { // if the login screen should be shown --------------------------------------------------------------
 	$filemanager = "
-	<table class='wf' border='0' cellspacing='0' cellpadding='20' width='100%'>
+	<table class='wf'>
 	<tr>
 	<td>
 	<span class='wf-heading'>$heading</span><br />
@@ -229,6 +229,9 @@ if($showlogin === false) {
 
 					// put the file in the directory
 					move_uploaded_file($_FILES['uploadedfile']['tmp_name'], $path.$_REQUEST['pathext'].$_FILES['uploadedfile']['name']);	
+
+					$msg = "<span class='wf-success'>Uploaded file '" . $_REQUEST['pathext'].$_FILES['uploadedfile']['name']  . "' successfully.</span><br />";
+
 				} else {
 					$msg = "<span class='wf-error'>There is not enough free space and the file could<br />not be uploaded.</span><br />";
 				}
@@ -237,7 +240,7 @@ if($showlogin === false) {
 				$msg =  "<span class='wf-error'>The file was greater than the maximum allowed file size of $maxkb Kb and could not be uploaded.</span><br />";
 			}
 		} else {
-			$msg =  "<span class='wf-error'>Please press the browse button and select a file to upload before you press the upload button.</span><br />";
+			$msg =  "<span class='wf-info'>Please press the browse button and select a file to upload before you press the upload button.</span><br />";
 		}
 	}
 
@@ -254,11 +257,26 @@ if($showlogin === false) {
 		if(is_dir($path.$_REQUEST['pathext'].$_GET['delete'])) {
 			$result = @rmdir($path.$_REQUEST['pathext'].$_GET['delete']);
 			if($result == 0) {
-				$msg = "<span class='wf-error'>The folder could not be deleted. The folder must be empty before you can delete it.</span><br />";
+				$msg = "<span class='wf-error'>The folder '" . $_REQUEST['pathext'].$_GET['delete'] . "' could not be deleted. The folder must be empty before you can delete it.</span><br />";
+			}
+			else
+			{
+				$msg = "<span class='wf-success'>'" . $_REQUEST['pathext'].$_GET['delete'] . "' deleted successfully. </span><br />";
 			}
 		} else {
 			if(file_exists($path.$_REQUEST['pathext'].$_GET['delete'])) {
-				unlink($path.$_REQUEST['pathext'].$_GET['delete']);
+				if( unlink($path.$_REQUEST['pathext'].$_GET['delete']) )
+				{
+	                                $msg = "<span class='wf-success'>'" . $_REQUEST['pathext'].$_GET['delete'] . "' deleted successfully. </span><br />";
+				}
+				else
+				{
+                                	$msg = "<span class='wf-error'>'" . $_REQUEST['pathext'].$_GET['delete'] . "' could not be deleted.</span><br />";
+				}
+			}
+			else
+			{
+				$msg = "<span class='wf-error'>Somebody deleted '" . $_REQUEST['pathext'].$_GET['delete'] . "' before I could.</span><br />";
 			}
 		}
 	}
@@ -281,7 +299,7 @@ if($showlogin === false) {
                         }
 			else
 			{
-				$msg = "<span class='wf-error'>'" . $_GET['rename'] . "' successfully moved/renamed to '" . $_GET['newname'] . "' .</span><br />";
+				$msg = "<span class='wf-success'>'" . $_GET['rename'] . "' successfully moved/renamed to '" . $_GET['newname'] . "' .</span><br />";
 			}
 		}
 
@@ -301,7 +319,7 @@ if($showlogin === false) {
                 else
                 {
 			if (!@exec("unzip -n ". $path.$_REQUEST['pathext'].$_GET['unzip'] ." -d ". $path.$_REQUEST['pathext'].$_GET['newname'])) {
-				$msg = "<span class='wf-error'>'" . $_GET['unzip'] . "' successfully unzipped to '" . $_GET['newname'] . "' .</span><br />";
+				$msg = "<span class='wf-success'>'" . $_GET['unzip'] . "' successfully unzipped to '" . $_GET['newname'] . "' .</span><br />";
 			} else {
 				$msg = "<span class='wf-error'>'" . $_GET['unzip'] . "' could not be unzipped to '" . $_GET['newname'] . "' .</span><br />";
 			}
@@ -318,7 +336,7 @@ if($showlogin === false) {
 				$msg = "<span class='wf-error'>The folder '" . $_POST['dirname'] . "' could not be created. Make sure the name you entered is a valid folder name.</span><br />";
 			}
 			else {
-				$msg = "<span class='wf-error'>Created folder '" . $path.$_REQUEST['pathext'].$_POST['dirname'] . "'</span><br />";
+				$msg = "<span class='wf-success'>Created folder '" . $_REQUEST['pathext'].$_POST['dirname'] . "'</span><br />";
 			}
 		}
 		else {
@@ -335,8 +353,10 @@ if($showlogin === false) {
 
 		// if $makediron has been set to on show some html for making directories
 		if($makediron === true) {
-			$mkdirhtml = "<input type='text' name='dirname' size='15' /><input type='submit' name='mkdir' value='Make Directory' />";
+			$mkdirhtml = "<span class='wf-label'>Create a Folder: </span> <input type='text' name='dirname' size='15' /><input type='submit' name='mkdir' value='Create' /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  ";
 		}
+
+		if($msg) $msg .= "<br />";
 
 		// build the html that makes up the file manager
 		// the $filemanager variable holds the first part of the html
@@ -347,17 +367,18 @@ if($showlogin === false) {
 		<table class='wf' border='0' cellspacing='0' cellpadding='20' width='100%'>
 		<tr>
 		<td>
-		<span class='wf-heading'>$heading</span> - <a href='$_SERVER[PHP_SELF]?logoff=1'>Log Off</a><br />
+		<span class='wf-heading'>$heading</span> - <a href='$_SERVER[PHP_SELF]?logoff=1'>Log Off</a><br /><br />
 		$msg
-		<span class='wf-label'>Total Space:</span> <span class='wf-text'>$hddspace Kb</span> <span class='wf-label'>Max File Size:</span> <span class='wf-text'>$maxfilesizekb Kb</span><br />
-		<span class='wf-label'>Free Space:</span> <span class='wf-text'>$freespace Kb</span> <span class='wf-label'>Used Space:</span> <span class='wf-text'>$hddtotal Kb</span><br />
+		<span class='wf-label'>Total Space:</span> <span class='wf-text'>$hddspace Kb</span>  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+		<span class='wf-label'>Max File Size:</span> <span class='wf-text'>$maxfilesizekb Kb</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+		<span class='wf-label'>Free Space:</span> <span class='wf-text'>$freespace Kb</span>  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+		<span class='wf-label'>Used Space:</span> <span class='wf-text'>$hddtotal Kb</span><br /><br />
 		<form name='form1' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data'>
 		<input type='hidden' name='MAX_FILE_SIZE' value='$maxfilesize' />
-		$mkdirhtml <br /><input type='file' name='uploadedfile' />
+		$mkdirhtml <span class='wf-label'>Upload File: </span><input type='file' name='uploadedfile' />
 		<input type='submit' name='upload' value='Upload' />
 		<input type='hidden' name='u' value='$_REQUEST[u]' />
 		<input type='hidden' name='pathext' value='$_REQUEST[pathext]' />
-		
 		</form>
 		<table width='100%' border='0' cellspacing='0' cellpadding='0' align='center'>
 		<tr class='wf-heading'> 
@@ -585,12 +606,14 @@ a:active {color: #666666; font-family : Verdana, Arial; font-size : 13px; }
 input.wf { font-size: 11px; background-color: #ffffff; }
 
 span.wf-text { font-family : Verdana, Arial; font-size : 13px; font-weight: normal; color: #333333; }
-span.wf-error { font-family : Verdana, Arial; font-size : 13px; font-weight: normal; color: #ff0000; }
+span.wf-error { text-align:center; display: block; padding: 10px; font-family : Verdana, Arial; font-size : 13px; font-weight: normal; color: #ffffff; background: #ff0000; }
+span.wf-info { text-align:center; display: block; padding: 10px; font-family : Verdana, Arial; font-size : 13px; font-weight: normal; color: #333333; background: #f5f500; }
+span.wf-success { text-align:center; display: block; padding: 10px; font-family : Verdana, Arial; font-size : 13px; font-weight: normal; color: #ffffff; background: #0a8a0a; }
 span.wf-heading { font-family : Verdana, Arial; font-size : 17px; font-weight: bold; color: #333333; }
 span.wf-label { font-family : Verdana, Arial; font-size : 13px; font-weight: bold; color: #333333; }
 span.wf-headingrow { font-family : Verdana, Arial; font-size : 13px; font-weight: bold; color: #ffffff; }
 
-table.wf { background: #eeeeee; }
+table.wf { background: #eeeeee; margin: 20px; border: 0; width: 90%; }
 tr.wf-heading { background: #333333; }
 tr.wf-line { background: #999999; }
 tr.wf-darkline { background: #000000; }
