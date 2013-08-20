@@ -409,7 +409,7 @@ if($showlogin === false) {
 							}
 						} else {
 							$filename = $file;
-							$fileicon = "&nbsp;" . $fileiconImage . ">&nbsp;";
+							$fileicon = "&nbsp;" . $fileiconImage . "&nbsp;";
 							
 							$pathparts = pathinfo($file);
 							$filetype = $type[$pathparts['extension']];
