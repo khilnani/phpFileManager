@@ -364,14 +364,14 @@ if($showlogin === false) {
 		// dont display files
 		$filemanager = "
 		<center>
-		<table class='wf' border='0' cellspacing='0' cellpadding='20' width='100%'>
+		<table class='wf' cellspacing='0' cellpadding='20'>
 		<tr>
 		<td>
-		<span class='wf-heading'>$heading</span> - <a href='$_SERVER[PHP_SELF]?logoff=1'>Log Off</a><br /><br />
+		<span class='wf-heading'>$heading</span> <a href='$_SERVER[PHP_SELF]?logoff=1'>Log Off</a><br /><br />
 		$msg
-		<span class='wf-label'>Total Space:</span> <span class='wf-text'>$hddspace Kb</span>  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-		<span class='wf-label'>Max File Size:</span> <span class='wf-text'>$maxfilesizekb Kb</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-		<span class='wf-label'>Free Space:</span> <span class='wf-text'>$freespace Kb</span>  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+		<span class='wf-label'>Total Space:</span> <span class='wf-text'>$hddspace Kb</span>  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+		<span class='wf-label'>Max File Size:</span> <span class='wf-text'>$maxfilesizekb Kb</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+		<span class='wf-label'>Free Space:</span> <span class='wf-text'>$freespace Kb</span>  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
 		<span class='wf-label'>Used Space:</span> <span class='wf-text'>$hddtotal Kb</span><br /><br />
 		<form name='form1' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data'>
 		<input type='hidden' name='MAX_FILE_SIZE' value='$maxfilesize' />
@@ -613,7 +613,7 @@ span.wf-heading { font-family : Verdana, Arial; font-size : 17px; font-weight: b
 span.wf-label { font-family : Verdana, Arial; font-size : 13px; font-weight: bold; color: #333333; }
 span.wf-headingrow { font-family : Verdana, Arial; font-size : 13px; font-weight: bold; color: #ffffff; }
 
-table.wf { background: #eeeeee; margin: 20px; border: 0; width: 90%; }
+table.wf { background: #eeeeee; border: 0; width: 100%; }
 tr.wf-heading { background: #333333; }
 tr.wf-line { background: #999999; }
 tr.wf-darkline { background: #000000; }
