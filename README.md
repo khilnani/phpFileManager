@@ -3,6 +3,23 @@ xqto-filemanager
 
 Modifications to the Php File Manager at http://www.xqto.com
 
+Setup
+===============
+
+- Copy files to an Apache server with Php configured
+- Run `chmod 755 index.php` as an appropriate user. eg. apache:web.
+- Update the username and password values in `index.php`
+
+Note
+---------------
+- You may rename the main Php script `index.php`
+
+History
+===============
+- Changed fault directory name validation check for ".". Added "/" check.
+- Added a JavaScript confirmation popup when deleting files/folders.
+- Merged the originally seperate 'styles.css' into 'index.php' to avoid including 'styles.css' in the do not show list.
+
 License
 ===============
 
