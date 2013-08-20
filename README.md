@@ -6,6 +6,9 @@ Modifications to the Php File Manager at http://www.xqto.com
 License
 ===============
 
+*GNU GENERAL PUBLIC LICENSE Version 3*
+
+
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
