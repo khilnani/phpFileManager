@@ -13,6 +13,8 @@ Setup
 Notes
 ===============
 - You may rename the main Php script `index.php`
+- Image to Base64 - http://webcodertools.com/imagetobase64converter/Create
+- Base64 to Image - http://www.freeformatter.com/base64-encoder.html
 
 History
 ===============
