@@ -10,8 +10,8 @@ Setup
 - Run `chmod 755 index.php` as an appropriate user. eg. apache:web.
 - Update the username and password values in `index.php`
 
-Note
----------------
+Notes
+===============
 - You may rename the main Php script `index.php`
 
 History
