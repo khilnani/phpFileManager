@@ -38,6 +38,7 @@ $newdirpermissions = 0700;
 $heading = 'File Manager';
 $downloadrate = 130000; // 130000 bytes per second typical download speed for working out download times
 $timezone = 'America/New_York';
+$path = '/Library/WebServer/Documents/';   // directory path, must end with a '/'
 
 $arrowiconImage = "<img alt='Back' src='data:image/gif;base64,R0lGODlhCgALAJECALS0tAAAAP///wAAACH5BAEAAAIALAAAAAAKAAsAAAIblBOmB5AbWnsiynnQRBCv6nUOwoGXw5wPyQYFADs=' />";
 $fileiconImage = "<img alt='' src='data:image/gif;base64,R0lGODlhCwANAJECAAAAAP///////wAAACH5BAEAAAIALAAAAAALAA0AAAIchG+iEO0pmGsMxEkRnmY/6XVeIIbgVqInhrRHAQA7' />";
@@ -90,7 +91,6 @@ if($timezone != '') {
 $showlogin = false;
 $msg = '';
 $thisfilename = basename(__FILE__); // get the file name
-$path = str_replace($thisfilename,'',__FILE__);   // get the directory path
 session_start();
 
 if($_REQUEST['user'] != '') {
