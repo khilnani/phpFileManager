@@ -6,24 +6,26 @@ Modifications to the Php File Manager at http://www.xqto.com
 Setup
 ===============
 
-- Copy files to an Apache server with Php configured
-- Run `chmod 755 index.php` as an appropriate user. eg. apache:web.
-- Update the username and password values in `index.php`
+- Copy files to a dedicated directory (eg. `admin\`) on an Apache server with Php configured.
+- Run `chmod 755 index.php`.
+- Update configuration properties in `config.ini`.
+- Chmod the Base Content Directory to be writable.
 
 Notes
-===============
-- You may rename the main Php script `index.php`
+===============`
 - Image to Base64 - http://webcodertools.com/imagetobase64converter/Create
 - Base64 to Image - http://www.freeformatter.com/base64-encoder.html
 
 History
 ===============
-- Converted images to base64 and embedded in index.php.
-- Added a success message when creating new folders.
-- Update Folder creation error messages to include the folder name.
-- Changed fault directory name validation check for ".". Added "/" check.
-- Added a JavaScript confirmation popup when deleting files/folders.
-- Merged the originally seperate 'styles.css' into 'index.php' to avoid including 'styles.css' in the do not show list.
+- NEW: Externalized configuration options to `config.ini`.
+- NEW: Added ability to customize the base content directory that will be  managed.
+- UPDATE: Improvement general formattig.
+- NEW: Added capability to unzip uploaded Zip files.
+- UPDATE: Improved Error messaging. Added Success messaging.
+- UPDATE: Converted images to base64 and embedded in index.php.
+- UPDATE: Improved directory and file name validation as well as case sensitivity.
+- NEW: Added a JavaScript confirmation popup when unzipping, deleting files/folders.
 
 License
 ===============
