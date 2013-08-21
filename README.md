@@ -20,11 +20,11 @@ Screenshots
 =========
 
 <img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/File%20Upload.png" />
-<img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/Deletion%20Error.png" width="40%" />
-<img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/Deletion%20Success.png" width="40%" />
-<img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/Folder%20Creation.png" width="40%" />
-<img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/Unzip.png" width="40%" />
-<img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/File%20Edit.png" width="40%" />
+<img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/Deletion%20Error.png" />
+<img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/Deletion%20Success.png" />
+<img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/Folder%20Creation.png" />
+<img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/Unzip.png" />
+<img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/File%20Edit.png" />
 
 History
 ===============
