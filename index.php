@@ -1,6 +1,6 @@
 <?php
 
-/* phpFile Manager
+/* phpFileManager
 *
 * Original code: http://www.xqto.com
 * Heavily modified by: Nik Khilnani / http://khilnani.org
