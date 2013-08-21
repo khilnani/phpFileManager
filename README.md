@@ -12,9 +12,19 @@ Setup
 - Chmod the Base Content Directory to be writable.
 
 Notes
-===============`
+===============
 - Image to Base64 - http://webcodertools.com/imagetobase64converter/Create
 - Base64 to Image - http://www.freeformatter.com/base64-encoder.html
+
+Screenshots
+=========
+
+<img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/File%20Upload.png" width="40%" />
+<img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/Deletion%20Error.png" width="40%" />
+<img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/Deletion%20Success.png" width="40%" />
+<img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/Folder%20Creation.png" width="40%" />
+<img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/Unzip.png" width="40%" />
+<img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/File%20Edit.png" width="40%" />
 
 History
 ===============
