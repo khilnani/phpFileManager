@@ -6,7 +6,7 @@ _An heavily modified version of the Php File Manager at http://www.xqto.com_
 Setup
 ===============
 
-- Copy files to a dedicated directory (eg. `admin\`) on an Apache server with Php configured.
+- Copy files to a dedicated directory (eg. `\admin\`) on an Apache server with Php configured.
 - Run `chmod 755 index.php`.
 - Update configuration properties in `config.ini`.
 - Chmod the Base Content Directory to be writable.
