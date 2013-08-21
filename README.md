@@ -1,7 +1,7 @@
 xqto-filemanager
 ================
 
-_Heavily modified version of the Php File Manager at http://www.xqto.com_
+_An heavily modified version of the Php File Manager at http://www.xqto.com_
 
 Setup
 ===============
