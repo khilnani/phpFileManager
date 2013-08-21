@@ -19,7 +19,7 @@ Notes
 Screenshots
 =========
 
-<img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/File%20Upload.png" width="40%" />
+<img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/File%20Upload.png" />
 <img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/Deletion%20Error.png" width="40%" />
 <img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/Deletion%20Success.png" width="40%" />
 <img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/Folder%20Creation.png" width="40%" />
