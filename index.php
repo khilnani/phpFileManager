@@ -1,10 +1,8 @@
 <?php
 
-/* XQTO File Manager 2.2
+/* phpFile Manager
 *
-* Copyright (C) 2008 XQTO.com All rights reserved.
-* Web Site: http://www.xqto.com
-*
+* Original code: http://www.xqto.com
 * Heavily modified by: Nik Khilnani / http://khilnani.org
 * 
 * This program is free software; you can redistribute it and/or
@@ -247,6 +245,8 @@ if($showlogin === false) {
 	}
 
 	if($_POST['save']) { // if the save button was pressed on the edit screen -------------------------------------------------------------------------
+
+		$newcontent = $_POST['newcontent'];
 		$newcontent = stripslashes($newcontent);
 		$fp = fopen($path.$_REQUEST['pathext'].$_POST['savefile'], "w");
 		fwrite($fp, $newcontent);
