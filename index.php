@@ -197,7 +197,7 @@ if($showlogin === false) {
 		<span class='wf-heading'>$heading</span><br /><br />
 		<form name='form1' method='post' action='$_SERVER[PHP_SELF]'>
 			  <center>
-				<span>Edit: '" . $_REQUEST['pathext'].$_GET['edit'] . "'</span><br />
+				<span class='wf-text'>Edit: '" . $_REQUEST['pathext'].$_GET['edit'] . "'</span><br />
 				<textarea name='newcontent' class='textarea'>$oldcontent</textarea>
 				<br />
 				<br />
