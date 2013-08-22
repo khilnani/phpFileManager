@@ -40,7 +40,8 @@ $editon = ($ini['editFile'] == 1);     // make this = false if you dont want the
 $makediron = ($ini['makeDir'] == 1);  // make this = false if you dont want to be able to make directories
 $heading = $ini['heading'];
 $timezone = $ini['timezone'];
-$path = $ini['basepath'];  // directory path, must end with a '/'
+$path = $ini['basePath'];  // directory path, must end with a '/'
+$baseUrl = $ini['baseUrl'];  // Url to match the basePath above
 
 
 $arrowiconImage = "<img alt='Back' src='data:image/gif;base64,R0lGODlhCgALAJECALS0tAAAAP///wAAACH5BAEAAAIALAAAAAAKAAsAAAIblBOmB5AbWnsiynnQRBCv6nUOwoGXw5wPyQYFADs=' />";
@@ -257,8 +258,10 @@ if($showlogin === false) {
 
 		// delete the file or directory
 		if(is_dir($path.$_REQUEST['pathext'].$_GET['delete'])) {
-			$result = @rmdir($path.$_REQUEST['pathext'].$_GET['delete']);
-			if($result == 0) {
+            
+            $result = rrmdir($path.$_REQUEST['pathext'].$_GET['delete']);
+			
+            if($result == 0) {
 				$msg = "<span class='wf-error'>The folder '" . $_REQUEST['pathext'].$_GET['delete'] . "' could not be deleted. The folder must be empty before you can delete it.</span><br />";
 			}
 			else
@@ -466,7 +469,7 @@ if($showlogin === false) {
 
 
 						// create some html for a link to download files 
-						$downloadlink = "<a href='" . fixViewPath($path,$_REQUEST[pathext],  $encodedfile) . "' target='_blank'>VIEW</a>";
+						$downloadlink = "<a href='" . $baseUrl.$_REQUEST[pathext].$encodedfile . "' target='_blank'>VIEW</a>";
 
 						// create some html for a link to delete files 
 						$deletelink = "<a href=\"javascript:var c=confirm('Delete \'" . $encodedfile  . "\' ?'); if(c) document.location='$_SERVER[PHP_SELF]?delete=$encodedfile&amp;u=$_REQUEST[u]&amp;pathext=$_REQUEST[pathext]'\">DELETE</a>";
@@ -581,16 +584,22 @@ function dirsize($dir) {
 	return $size;
 }
 
-function fixViewPath($path, $dir, $file) {
-	$count = substr_count( str_replace($path,"/",dirname(__FILE__)), "/");
-	$relpath = "";
-	for($i=0; $i < $count; $i++)
-	{
-		$relpath .= "../";
-	}
-	$relpath .= $dir . $file;
-	return $relpath;
+function rrmdir($dir) {
+    if (is_dir($dir)) {
+        $objects = scandir($dir);
+        foreach ($objects as $object) {
+            if ($object != "." && $object != "..") {
+                if (filetype($dir."/".$object) == "dir") 
+                    rrmdir($dir."/".$object); else unlink($dir."/".$object);
+            }
+        }
+        reset($objects);
+        rmdir($dir);
+    }
+    
+    return true;
 }
+
 ?>
 
 
