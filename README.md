@@ -7,7 +7,8 @@ Setup
 ===============
 
 - Copy files to a dedicated directory (eg. `\admin\`) on an Apache server with Php configured.
-- Run `chmod 755 index.php`.
+- `chmod 666` the files in `\templates\`.
+- `chmod 755 index.php`.
 - Update configuration properties in `config.ini`.
 - Chmod the Base Content Directory to be writable.
 
