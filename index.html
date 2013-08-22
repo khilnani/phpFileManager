@@ -32,14 +32,15 @@
 <a name="phpfilemanager" class="anchor" href="#phpfilemanager"><span class="octicon octicon-link"></span></a><em>phpFileManager</em>
 </h1>
 
-<p><em>An heavily modified version of the Php File Manager at <a href="http://www.xqto.com">http://www.xqto.com</a></em></p>
-
 <h1>
 <a name="setup" class="anchor" href="#setup"><span class="octicon octicon-link"></span></a>Setup</h1>
 
 <ul>
 <li>Copy files to a dedicated directory (eg. <code>\admin\</code>) on an Apache server with Php configured.</li>
-<li>Run <code>chmod 755 index.php</code>.</li>
+<li>
+<code>chmod 666</code> the files in <code>\templates\</code>.</li>
+<li>
+<code>chmod 755 index.php</code>.</li>
 <li>Update configuration properties in <code>config.ini</code>.</li>
 <li>Chmod the Base Content Directory to be writable.</li>
 </ul><h1>
