@@ -41,10 +41,6 @@ Setup
          \... (directory to be managed)
 ```
 
-Notes
-===============
-- Image to Base64 - http://webcodertools.com/imagetobase64converter/Create
-- Base64 to Image - http://www.freeformatter.com/base64-encoder.html
 
 Screenshots
 =========
@@ -55,6 +51,11 @@ Screenshots
 <img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/Folder%20Creation.png" />
 <img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/Unzip.png" />
 <img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/File%20Edit.png" />
+
+Links
+===============
+- Image to Base64 - http://webcodertools.com/imagetobase64converter/Create
+- Base64 to Image - http://www.freeformatter.com/base64-encoder.html
 
 History
 ===============
