@@ -22,11 +22,10 @@ Setup
 - `chmod 666` `config.ini` and the files in `\templates\`.
 - `chmod 755 index.php`.
 - Update configuration properties in `config.ini`.
-- Chmod the Base Content Directory to be writable.
+- `chmod 777` the directory to be managed.
 - Sample directory structure
 
 ```
-<code>
  \admin
        \index.php
        \config.ini
