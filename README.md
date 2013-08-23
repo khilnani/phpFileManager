@@ -1,15 +1,44 @@
 _phpFileManager_
 ================
 
+A web based file manager with the features below built using Php
+
+- Password/authentication. _Can be configured to be enabled/disabled._
+- File Upload. _Can be configured to be enabled/disabled._
+- Ability to unzip ZIP files to a desired folder.
+- Folder creation. _Can be configured to be enabled/disabled._
+- Folder deletion. _Can delete folders that are not empty._
+- Customizable directory path
+- Rename files.
+- Edit files. Ability to specify which files can be edited. _Can be configured to be enabled/disabled._
+- Configurable idden files. Ability to specify files that should not be displayed. _Can be configured to be enabled/disabled._
+- Simple User friendly interface - Clear error and success confirmation messages.
+- User customizable interface - HTML and CSS is organized into HTML templates that can be customized without editing Php.
 
 Setup
 ===============
 
 - Copy files to a dedicated directory (eg. `\admin\`) on an Apache server with Php configured.
-- `chmod 666` the files in `\templates\`.
+- `chmod 666` `config.ini` and the files in `\templates\`.
 - `chmod 755 index.php`.
 - Update configuration properties in `config.ini`.
 - Chmod the Base Content Directory to be writable.
+- Sample directory structure
+```
+ \admin
+       \index.php
+       \config.ini
+       \css
+           \styles.css
+       \templates
+                   \edit.html
+                   \layout.html
+                   \main.html
+                   \main-row.html
+                   \edit.html
+ \content
+         \... (directory to be managed)
+```
 
 Notes
 ===============
@@ -30,7 +59,7 @@ History
 ===============
 - NEW: Externalized configuration options to `config.ini`.
 - NEW: Added ability to customize the base content directory that will be  managed.
-- UPDATE: Improvement general formattig.
+- NEW: Externalized 905 of html into templates. Also improvement general formatting.
 - NEW: Added capability to unzip uploaded Zip files.
 - UPDATE: Improved Error messaging. Added Success messaging.
 - UPDATE: Converted images to base64 and embedded in index.php.
