@@ -309,205 +309,200 @@ else
     //-----------------------------------------------------------------------------
     // Main Page display
     //-----------------------------------------------------------------------------
-	if($filemanager == '') 
-    { 
 
-
-		// if $makediron has been set to on show some html for making directories
-		if($makediron === true) {
-			$mkdirhtml = "<span class='wf-label'>Create a Folder: </span> <input type='text' name='dirname' size='15' /><input type='submit' name='mkdir' value='Create' /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  ";
-		}
-
-		// build the html that makes up the file manager
-		// the $filemanager variable holds the first part of the html
-		// including the form tags and the top 2 heading rows of the table which
-		// dont display files
-		$filemanager = "
-		<center>
-		<table class='wf' cellspacing='0' cellpadding='20'>
-		<tr>
-		<td>
-		<span class='wf-heading'>$heading</span> <a href='$_SERVER[PHP_SELF]?logoff=1'>Log Off</a><br /><br />
-		" . $tmplData['{{msg}}'] . "
-		<form name='form1' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data'>
-		<input type='hidden' name='MAX_FILE_SIZE' value='$maxfilesize' />
-		$mkdirhtml <span class='wf-label'>Upload File: </span><input type='file' name='uploadedfile' />
-		<input type='submit' name='upload' value='Upload' />
-		<input type='hidden' name='u' value='$_REQUEST[u]' />
-		<input type='hidden' name='pathext' value='$_REQUEST[pathext]' />
-		</form>
-		<table width='100%' border='0' cellspacing='0' cellpadding='0' align='center'>
-		<tr class='wf-heading'> 
-		<td width='25'>&nbsp;</td>
-		<td><span class='wf-headingrow'>&nbsp;FILENAME&nbsp;</span></td>
-		<td><span class='wf-headingrow'>&nbsp;TYPE&nbsp;</span></td>
-		<td><span class='wf-headingrow'>&nbsp;SIZE&nbsp;</span></td>
-		<td><span class='wf-headingrow'>&nbsp;LAST MODIFIED&nbsp;</span></td>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-		</tr>
-		<tr class='wf-line'> 
-		<td colspan='9' height='2'></td>
-		</tr>";
-
-	// if the current directory is a sub directory show a back link to get back to the previous directory
-		if($_REQUEST['pathext'] != '') {
-			$filemanager  .= "
-			<tr>
-			<td class='wf-lightcolumn'>&nbsp;" . $arrowiconImage . "&nbsp;</td>
-			<td class='wf-darkcolumn'>&nbsp;<a href='$_SERVER[PHP_SELF]?u=$_REQUEST[u]&amp;back=1&amp;pathext=$_REQUEST[pathext]'>&laquo;BACK</a>&nbsp;</td>
-			<td class='wf-lightcolumn'></td>
-			<td class='wf-darkcolumn'></td>
-			<td class='wf-lightcolumn'></td>
-			<td class='wf-darkcolumn'></td>
-			<td class='wf-lightcolumn'></td>
-			<td class='wf-darkcolumn'></td>
-			<td class='wf-lightcolumn'></td>
-			</tr>
-			<tr class='wf-darkline'> 
-			<td colspan='9' height='1'></td>
-			</tr>";
-		}
-
-		// build the table rows which contain the file information
-		$newpath = substr($path.$_REQUEST['pathext'], 0, -1);   // remove the forward or backwards slash from the path
-		$dir = @opendir($newpath); // open the directory
-		while($file = readdir($dir)) { // loop once for each name in the directory
-			$filearray[] = $file;
-		}
-		natcasesort($filearray);
-
-		foreach($filearray as $key => $file) {
-
-			// check to see if the file is a directory and if it can be opened, if not hide it
-			$hiddendir = 0;
-			if(is_dir($path.$_REQUEST['pathext'].$file)) {
-				$tempdir = @opendir($path.$_REQUEST['pathext'].$file);
-				if($tempdir == false) { $hiddendir = 1;}
-				@closedir($tempdir);
-			}
-
-			// if the name is not a directory and the name is not the name of this program file 
-			if($file != '.' && $file != '..' && $file != basename(__FILE__) && $hiddendir != 1) {
-				$match = false;
-				foreach($hiddenfiles as $name) { // for each value in the hidden files array
-
-					if($file == $name) { // check the name is not the same as the hidden file name
-						$match = true;	 // set a flag if this name is supposed to be hidden
-					}
-				}	
-
-				if($match === false) { // if there were no matches the file should not be hidden
-
-						$filedata = stat($path.$_REQUEST['pathext'].$file); // get some info about the file
-						$encodedfile = rawurlencode($file);
-
-						// find out if the file is one that can be edited
-						$editlink = '';
-						if($editon === true && !is_dir($path.$_REQUEST['pathext'].$file)) { // if the edit function is turned on and the file is not a directory
-
-							$dotpos = strrpos($file,'.');
-							foreach($editextensions as $editext) {
-
-								$ext = substr($file, ($dotpos+1));
-								if(strcmp( strtolower( $ext ) , $editext) == 0) {
-									$editlink = "&nbsp;<a href='$_SERVER[PHP_SELF]?edit=$encodedfile&amp;u=$_REQUEST[u]&amp;pathext=$_REQUEST[pathext]'>EDIT</a>&nbsp;";
-								}
-							}
-						}
-
-
-						// create some html for a link to download files 
-						$downloadlink = "<a href='" . $baseUrl.$_REQUEST[pathext].$encodedfile . "' target='_blank'>VIEW</a>";
-
-						// create some html for a link to delete files 
-						$deletelink = "<a href=\"javascript:var c=confirm('Delete \'" . $encodedfile  . "\' ?'); if(c) document.location='$_SERVER[PHP_SELF]?delete=$encodedfile&amp;u=$_REQUEST[u]&amp;pathext=$_REQUEST[pathext]'\">DELETE</a>";
-
-                                                $renamelink = "<a href=\"javascript:var c=prompt('Rename \'" . $encodedfile  . "\' to'); if(c) document.location='$_SERVER[PHP_SELF]?rename=$encodedfile&amp;newname=' + c + '&amp;u=$_REQUEST[u]&amp;pathext=$_REQUEST[pathext]'\">RENAME</a>";
-
-						$unziplink = "<a href=\"javascript:var c=prompt('Unzip \'" . $encodedfile  . "\' to'); if(c) document.location='$_SERVER[PHP_SELF]?unzip=$encodedfile&amp;newname=' + c + '&amp;u=$_REQUEST[u]&amp;pathext=$_REQUEST[pathext]'\">UNZIP</a>";
-
-
-						// if it is a directory change the file name to a directory link
-						if(is_dir($path.$_REQUEST['pathext'].$file)) {
-							$filename = "<a href='$_SERVER[PHP_SELF]?u=$_REQUEST[u]&amp;pathext=$_REQUEST[pathext]$encodedfile/'>$file</a>";
-							$fileicon = "&nbsp;" . $foldericonImage . "&nbsp;";
-							$downloadlink = '';
-							$filedata[7] = '';
-							$modified = '';
-							$filetype = '';
-							if($deletediron === false) {
-								$deletelink = '';
-							}
-							$tmpeditlink = "";
-						} else {
-							$filename = $file;
-							$fileicon = "&nbsp;" . $fileiconImage . "&nbsp;";
-
-							$pathparts = pathinfo($file);
-							$filetype = $type[ strtolower($pathparts['extension']) ];
-
-							$tmpeditlink = $editlink;
-
-                                                	if( strtolower( $pathparts['extension'] ) == 'zip') {
-                                                        	$tmpeditlink = $unziplink;
-                                                	}
-
-							$modified = date('d-M-y g:ia',$filedata[9]);
-
-
-							if($filedata[7] > 1024) {
-								$filedata[7] = round($filedata[7]/1024);
-								if($filedata[7] > 1024) {
-									$filedata[7] = round($filedata[7]/1024);
-									if($filedata[7] > 1024) {
-										$filedata[7] = round($filedata[7]/1024,1);
-										if($filedata[7] > 1024) {
-											$filedata[7] = round($filedata[7]/1024);
-												$filedata[7] = $filedata[7].'Tb';
-										} else {
-											$filedata[7] = $filedata[7].'Gb';
-										}
-									} else {
-										$filedata[7] = $filedata[7].'Mb';
-									}
-								} else {
-									$filedata[7] = $filedata[7].'Kb';
-								}
-							} else {
-								$filedata[7] = $filedata[7].'b';
-							}
-						}
-
-						// append 2 table rows to the $content variable, the first row has the file
-						// informtation, the 2nd row makes a black line 1 pixel high
-
-						$content .= "
-						<tr>
-						<td class='wf-lightcolumn'>$fileicon</td>
-						<td class='wf-darkcolumn'>&nbsp;<span class='wt-text'>$filename</span>&nbsp;</td>
-						<td class='wf-lightcolumn'>&nbsp;<span class='wt-text'>$filetype</span>&nbsp;</td>
-						<td class='wf-darkcolumn'>&nbsp;<span class='wt-text'>$filedata[7]</span>&nbsp;</td>
-						<td class='wf-lightcolumn'>&nbsp;<span class='wt-text'>$modified</span>&nbsp;</td>
-						<td class='wf-darkcolumn'>&nbsp;$downloadlink&nbsp;</td>
-						<td class='wf-lightcolumn'>&nbsp;$deletelink&nbsp;</td>
-						<td class='wf-darkcolumn'>&nbsp;$tmpeditlink&nbsp;</td>
-						<td class='wf-lightcolumn'>&nbsp;$renamelink&nbsp;</td>
-						</tr>
-						<tr class='wf-darkline'> 
-						<td colspan='9' height='1'></td>
-						</tr>";
-				}
-			}
-		}
-		closedir($dir); // now that all the rows have been built close the directory
-		$content .= "</table></td></tr></table></center>"; // add some closing tags to the $content variable
-		$filemanager  .= $content; // append the html to the $filemanager variable
+    $content = '';
+        
+	// if $makediron has been set to on show some html for making directories
+	if($makediron === true) 
+    {
+		$tmplData['{{displayCreateFolder}}'] = "inline";
 	}
+    else
+    {
+        $tmplData['{{displayCreateFolder}}'] = "none";
+    }
+        
+    $tmplData['{{maxfilesize}}'] = $maxfilesize;
+    $tmplData['{{u}}'] = $_REQUEST[u];
+    $tmplData['{{pathext}}'] = $_REQUEST['pathext'];    
+    $tmplData['{{arrowiconImage}}']  = $arrowiconImage;
+        
+    // if the current directory is a sub directory show a back 
+    // link to get back to the previous directory
+    if($_REQUEST['pathext'] != '') 
+    {
+		$tmplData['{{displayBackLink}}'] = "visible";
+	}
+    else
+    {
+        $tmplData['{{displayBackLink}}'] = "hidden";
+    }
     
-    $tmplData['{{content}}'] = $filemanager;
+    //-----------------------------------------------------------------------------
+ 
+	// build the table rows which contain the file information
+    // remove the forward or backwards slash from the path
+	$newpath = substr($path.$_REQUEST['pathext'], 0, -1);   
+	
+    // open the directory
+    $dir = @opendir($newpath); 
+	
+    // loop once for each name in the directory
+    while($file = readdir($dir)) 
+    { 
+		$filearray[] = $file;
+	}
+	natcasesort($filearray);
+
+	foreach($filearray as $key => $file) 
+    {
+
+		// check to see if the file is a directory and if it can be opened, if not hide it
+		$hiddendir = 0;
+		if(is_dir($path.$_REQUEST['pathext'].$file)) 
+        {
+			$tempdir = @opendir($path.$_REQUEST['pathext'].$file);
+			if($tempdir == false) { $hiddendir = 1;}
+			@closedir($tempdir);
+		}
+
+		// if the name is not a directory and the name is not the name of this program file 
+		if($file != '.' && $file != '..' && $file != basename(__FILE__) && $hiddendir != 1) 
+        {
+			$match = false;
+            // for each value in the hidden files array
+			foreach($hiddenfiles as $name) 
+            { 
+                // check the name is not the same as the hidden file name
+				if($file == $name) 
+                { 
+                    // set a flag if this name is supposed to be hidden
+					$match = true;	 
+				}
+			}	
+
+            // if there were no matches the file should not be hidden
+			if($match === false) 
+            { 
+                // get some info about the file
+				$filedata = stat($path.$_REQUEST['pathext'].$file); 
+				$encodedfile = rawurlencode($file);
+
+				// find out if the file is one that can be edited
+				$editlink = '';
+				
+                // if the edit function is turned on and the file is not a directory
+                if($editon === true && !is_dir($path.$_REQUEST['pathext'].$file)) 
+                { 
+					$dotpos = strrpos($file,'.');
+					foreach($editextensions as $editext) 
+                    {
+						$ext = substr($file, ($dotpos+1));
+						if(strcmp( strtolower( $ext ) , $editext) == 0) 
+                        {
+							$editlink = "&nbsp;<a href='$_SERVER[PHP_SELF]?edit=$encodedfile&amp;u=$_REQUEST[u]&amp;pathext=$_REQUEST[pathext]'>EDIT</a>&nbsp;";
+						}
+					}
+				}
+
+				// create some html for a link to download files 
+				$downloadlink = "<a href='" . $baseUrl.$_REQUEST[pathext].$encodedfile . "' target='_blank'>VIEW</a>";
+				// create some html for a link to delete files 
+				$deletelink = "<a href=\"javascript:var c=confirm('Delete \'" . $encodedfile  . "\' ?'); if(c) document.location='$_SERVER[PHP_SELF]?delete=$encodedfile&amp;u=$_REQUEST[u]&amp;pathext=$_REQUEST[pathext]'\">DELETE</a>";
+                $renamelink = "<a href=\"javascript:var c=prompt('Rename \'" . $encodedfile  . "\' to'); if(c) document.location='$_SERVER[PHP_SELF]?rename=$encodedfile&amp;newname=' + c + '&amp;u=$_REQUEST[u]&amp;pathext=$_REQUEST[pathext]'\">RENAME</a>";
+                $unziplink = "<a href=\"javascript:var c=prompt('Unzip \'" . $encodedfile  . "\' to'); if(c) document.location='$_SERVER[PHP_SELF]?unzip=$encodedfile&amp;newname=' + c + '&amp;u=$_REQUEST[u]&amp;pathext=$_REQUEST[pathext]'\">UNZIP</a>";
+
+                // if it is a directory change the file name to a directory link
+                if(is_dir($path.$_REQUEST['pathext'].$file)) 
+                {
+					$filename = "<a href='$_SERVER[PHP_SELF]?u=$_REQUEST[u]&amp;pathext=$_REQUEST[pathext]$encodedfile/'>$file</a>";
+					$fileicon = "&nbsp;" . $foldericonImage . "&nbsp;";
+					$downloadlink = '';
+					$filedata[7] = '';
+					$modified = '';
+					$filetype = '';
+					if($deletediron === false) 
+                    {
+						$deletelink = '';
+					}
+					$tmpeditlink = "";
+				}
+                else 
+                {
+					$filename = $file;
+					$fileicon = "&nbsp;" . $fileiconImage . "&nbsp;";
+
+					$pathparts = pathinfo($file);
+					$filetype = $type[ strtolower($pathparts['extension']) ];
+
+					$tmpeditlink = $editlink;
+
+                    if( strtolower( $pathparts['extension'] ) == 'zip') 
+                    {
+                        $tmpeditlink = $unziplink;
+                    }
+
+                    $modified = date('d-M-y g:ia',$filedata[9]);
+
+                    if($filedata[7] > 1024) 
+                    {
+                        $filedata[7] = round($filedata[7]/1024);
+                        if($filedata[7] > 1024) 
+                        {
+                            $filedata[7] = round($filedata[7]/1024);
+                            if($filedata[7] > 1024) 
+                            {
+                                $filedata[7] = round($filedata[7]/1024,1);
+                                if($filedata[7] > 1024) 
+                                {
+                                    $filedata[7] = round($filedata[7]/1024);
+                                    $filedata[7] = $filedata[7].'Tb';
+                                }
+                                else 
+                                {
+                                    $filedata[7] = $filedata[7].'Gb';
+                                }
+                            }
+                            else
+                            {
+                                $filedata[7] = $filedata[7].'Mb';
+                            }
+                        }
+                        else 
+                        {
+                            $filedata[7] = $filedata[7].'Kb';
+                        }
+                    }
+                    else 
+                    {
+						$filedata[7] = $filedata[7].'b';
+					}
+				}
+
+				// append 2 table rows to the $content variable, the first row has the file
+				// informtation, the 2nd row makes a black line 1 pixel high
+                        
+                $tmplData['{{fileicon}}'] = $fileicon;
+                $tmplData['{{filename}}'] = $filename;
+                $tmplData['{{filetype}}'] = $filetype;
+                $tmplData['{{filedata}}'] = $filedata[7];
+                $tmplData['{{modified}}'] = $modified;
+                $tmplData['{{downloadlink}}'] = $downloadlink;
+                $tmplData['{{deletelink}}'] = $deletelink;
+                $tmplData['{{tmpeditlink}}'] = $tmpeditlink;
+                $tmplData['{{renamelink}}'] = $renamelink;
+
+				$content .= Template::render($ini['mainRowTemplate'], $tmplData);
+			}
+		}
+	}
+	
+    // now that all the rows have been built close the directory
+    closedir($dir); 
+
+    //-----------------------------------------------------------------------------
+    
+    $tmplData['{{content}}'] = $content;
     renderMain($tmplData);
 
 }
@@ -639,7 +634,7 @@ function renderMain($tmplData)
 {
     global $ini;
     
-    //$tmplData['{{content}}'] = Template::render($ini['mainTemplate'], $tmplData);
+    $tmplData['{{content}}'] = Template::render($ini['mainTemplate'], $tmplData);
     Template::display($ini['layoutTemplate'], $tmplData);    
 }
 

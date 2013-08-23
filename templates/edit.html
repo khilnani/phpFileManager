@@ -1,22 +1,25 @@
-    	<center>
-		<table class='wf' border='0' cellspacing='0' cellpadding='20' width='100%'>
-		<tr>
-		<td>
-		<span class='wf-heading'>{{heading}}</span><br /><br />
-		<form name='form1' method='post' action='{{action}}'>
-			  <center>
-				<span class='wf-text'>Edit: '{{pathext}}{{editingFile}}'</span><br />
-				<textarea name='newcontent' class='textarea'>{{oldcontent}}</textarea>
-				<br />
-				<br />
-				<input type='submit' name='save' value='Save'/>
-				<input type='submit' name='cancel' value='Cancel' />
-				<input type='hidden' name='u' value='{{u}}' />
-				<input type='hidden' name='savefile' value='{{editingFile}}' />
-				<input type='hidden' name='pathext' value='{{pathext}}' />
-			  </center>
-		</form>
-		</td>
-		</tr>
-		</table>
-		</center>
+<center>
+    <table class='wf' border='0' cellspacing='0' cellpadding='20' width='100%'>
+        <tr>
+            <td>
+                <span class='wf-heading'>{{heading}}</span>
+                <br />
+                <br />
+                <form name='form1' method='post' action='{{action}}'>
+                    <center>
+                        <span class='wf-text'>Edit: '{{pathext}}{{editingFile}}'</span>
+                        <br />
+                        <textarea name='newcontent' class='textarea'>{{oldcontent}}</textarea>
+                        <br />
+                        <br />
+                        <input type='submit' name='save' value='Save' />
+                        <input type='submit' name='cancel' value='Cancel' />
+                        <input type='hidden' name='u' value='{{u}}' />
+                        <input type='hidden' name='savefile' value='{{editingFile}}' />
+                        <input type='hidden' name='pathext' value='{{pathext}}' />
+                    </center>
+                </form>
+            </td>
+        </tr>
+    </table>
+</center>
