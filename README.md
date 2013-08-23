@@ -24,7 +24,9 @@ Setup
 - Update configuration properties in `config.ini`.
 - Chmod the Base Content Directory to be writable.
 - Sample directory structure
+
 ```
+<code>
  \admin
        \index.php
        \config.ini
