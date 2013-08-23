@@ -4,47 +4,99 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>phpFileManager by khilnani</title>
-
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
     <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
   </head>
   <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/khilnani/phpFileManager">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/khilnani/phpFileManager/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/khilnani/phpFileManager/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
     <div class="wrapper">
-      <header>
-        <h1>phpFileManager</h1>
-        <p>A Php based File Manager.</p>
 
-        <p class="view"><a href="https://github.com/khilnani/phpFileManager">View the Project on GitHub <small>khilnani/phpFileManager</small></a></p>
-
-
-        <ul>
-          <li><a href="https://github.com/khilnani/phpFileManager/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/khilnani/phpFileManager/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/khilnani/phpFileManager">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
       <section>
+        <div id="title">
+          <h1>phpFileManager</h1>
+          <p>A Php based File Manager.</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/khilnani">khilnani</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
         <h1>
 <a name="phpfilemanager" class="anchor" href="#phpfilemanager"><span class="octicon octicon-link"></span></a><em>phpFileManager</em>
 </h1>
 
-<h1>
+<p>A web based file manager with the features below built using Php</p>
+
+<ul>
+<li>Password/authentication. <em>Can be configured to be enabled/disabled.</em>
+</li>
+<li>File Upload. <em>Can be configured to be enabled/disabled.</em>
+</li>
+<li>Ability to unzip ZIP files to a desired folder.</li>
+<li>Folder creation. <em>Can be configured to be enabled/disabled.</em>
+</li>
+<li>Folder deletion. <em>Can delete folders that are not empty.</em>
+</li>
+<li>Customizable directory path</li>
+<li>Rename files.</li>
+<li>Edit files. Ability to specify which files can be edited. <em>Can be configured to be enabled/disabled.</em>
+</li>
+<li>Configurable idden files. Ability to specify files that should not be displayed. <em>Can be configured to be enabled/disabled.</em>
+</li>
+<li>Simple User friendly interface - Clear error and success confirmation messages.</li>
+<li>User customizable interface - HTML and CSS is organized into HTML templates that can be customized without editing Php.</li>
+</ul><h1>
 <a name="setup" class="anchor" href="#setup"><span class="octicon octicon-link"></span></a>Setup</h1>
 
 <ul>
 <li>Copy files to a dedicated directory (eg. <code>\admin\</code>) on an Apache server with Php configured.</li>
 <li>
-<code>chmod 666</code> the files in <code>\templates\</code>.</li>
+<code>chmod 666</code> <code>config.ini</code> and the files in <code>\templates\</code>.</li>
 <li>
 <code>chmod 755 index.php</code>.</li>
 <li>Update configuration properties in <code>config.ini</code>.</li>
-<li>Chmod the Base Content Directory to be writable.</li>
-</ul><h1>
-<a name="notes" class="anchor" href="#notes"><span class="octicon octicon-link"></span></a>Notes</h1>
+<li>
+<code>chmod 777</code> the directory to be managed.</li>
+<li>Sample directory structure</li>
+</ul><pre><code> \admin
+       \index.php
+       \config.ini
+       \css
+           \styles.css
+       \templates
+                   \edit.html
+                   \layout.html
+                   \main.html
+                   \main-row.html
+                   \edit.html
+ \content
+         \... (directory to be managed)
+</code></pre>
+
+<h1>
+<a name="screenshots" class="anchor" href="#screenshots"><span class="octicon octicon-link"></span></a>Screenshots</h1>
+
+<p><img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/File%20Upload.png"><img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/Deletion%20Error.png"><img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/Deletion%20Success.png"><img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/Folder%20Creation.png"><img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/Unzip.png"><img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/File%20Edit.png"></p>
+
+<h1>
+<a name="links" class="anchor" href="#links"><span class="octicon octicon-link"></span></a>Links</h1>
 
 <ul>
 <li>Image to Base64 - <a href="http://webcodertools.com/imagetobase64converter/Create">http://webcodertools.com/imagetobase64converter/Create</a>
@@ -52,17 +104,12 @@
 <li>Base64 to Image - <a href="http://www.freeformatter.com/base64-encoder.html">http://www.freeformatter.com/base64-encoder.html</a>
 </li>
 </ul><h1>
-<a name="screenshots" class="anchor" href="#screenshots"><span class="octicon octicon-link"></span></a>Screenshots</h1>
-
-<p><img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/File%20Upload.png"><img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/Deletion%20Error.png"><img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/Deletion%20Success.png"><img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/Folder%20Creation.png"><img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/Unzip.png"><img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/File%20Edit.png"></p>
-
-<h1>
 <a name="history" class="anchor" href="#history"><span class="octicon octicon-link"></span></a>History</h1>
 
 <ul>
 <li>NEW: Externalized configuration options to <code>config.ini</code>.</li>
 <li>NEW: Added ability to customize the base content directory that will be  managed.</li>
-<li>UPDATE: Improvement general formattig.</li>
+<li>NEW: Externalized 905 of html into templates. Also improvement general formatting.</li>
 <li>NEW: Added capability to unzip uploaded Zip files.</li>
 <li>UPDATE: Improved Error messaging. Added Success messaging.</li>
 <li>UPDATE: Converted images to base64 and embedded in index.php.</li>
@@ -87,12 +134,9 @@ GNU General Public License for more details.</p>
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.</p>
       </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/khilnani">khilnani</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
+
     </div>
-    <script src="javascripts/scale.fix.js"></script>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
     
   </body>
 </html>
