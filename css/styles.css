@@ -3,14 +3,12 @@ table.mainTable {
     border: 0;
     width: 100%;
 }
+tr.line {
+    background: #666666;
+}
 tr.header {
     background: #333333;
-}
-tr.line {
-    background: #999999;
-}
-tr.darkline {
-    background: #000000;
+    padding-left: 5px;
 }
 td.lightcolumn {
     background: #ffffff;
@@ -19,6 +17,7 @@ td.lightcolumn {
     font-weight: normal;
     color: #333333;
     height: 20px;
+    padding-left: 5px;
 }
 td.darkcolumn {
     background: #eeeeee;
@@ -27,10 +26,7 @@ td.darkcolumn {
     font-weight: normal;
     color: #333333;
     height: 20px;
-}
-input.mainTable {
-    font-size: 11px;
-    background-color: #ffffff;
+    padding-left: 5px;
 }
 span.text {
     font-family : Verdana, Arial;
@@ -46,7 +42,7 @@ span.error {
     font-size : 13px;
     font-weight: normal;
     color: #ffffff;
-    background: #ff0000;
+    background: #8E1919;
 }
 span.info {
     text-align:center;
@@ -56,7 +52,7 @@ span.info {
     font-size : 13px;
     font-weight: normal;
     color: #333333;
-    background: #f5f500;
+    background: #FFCC00;
 }
 span.success {
     text-align:center;
@@ -66,7 +62,7 @@ span.success {
     font-size : 13px;
     font-weight: normal;
     color: #ffffff;
-    background: #0a8a0a;
+    background: #297A29;
 }
 span.title {
     font-family : Verdana, Arial;
@@ -85,13 +81,6 @@ span.hrow {
     font-size : 13px;
     font-weight: bold;
     color: #ffffff;
-}
-.textarea {
-    width:90%;
-    height: 600px;
-    padding: 10px;
-    margin: 10px;
-    border: 1px solid #ccc;
 }
 .icon {
     height: 15px;
@@ -122,23 +111,83 @@ span.hrow {
 .maxWidth {
     width:100%;
 }
+input.mainTable {
+    font-size: 11px;
+    background-color: #ffffff;
+}
+input[type=submit] {
+    background-color: #0066CC;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius:6px;
+    color: #ffffff;
+    font-size: 12px;
+    text-decoration: none;
+    cursor: poiner;
+    border:none;
+}
+input[type=submit]:hover {
+    border: none;
+    background:#003D7A;
+    box-shadow: 0px 0px 1px #777;
+
+}
+input[type=reset] {
+    background-color: #0066CC;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius:6px;
+    color: #ffffff;
+    font-size: 12px;
+    text-decoration: none;
+    cursor: poiner;
+    border:none;
+}
+input[type=reset]:hover {
+    border: none;
+    background:#003D7A;
+    box-shadow: 0px 0px 1px #777;
+}
+input[type=file] {
+    background-color: #0066CC;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius:6px;
+    color: #ffffff;
+    font-size: 12px;
+    text-decoration: none;
+    cursor: poiner;
+    border:none;
+}
+
+.textarea {
+    width:90%;
+    height: 600px;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #ccc;
+}
 a:link {
-    color: #666666;
+    color: #0066CC;
     font-family : Verdana, Arial;
     font-size : 13px;
+    text-decoration:none;
 }
 a:visited {
-    color: #666666;
+    color: #0066CC;
     font-family : Verdana, Arial;
     font-size : 13px;
+    text-decoration:none;
 }
 a:hover {
-    color: #666666;
+    color: #003D7A;
     font-family : Verdana, Arial;
     font-size : 13px;
+    text-decoration:none;
 }
 a:active {
-    color: #666666;
+    color: #0066CC;
     font-family : Verdana, Arial;
     font-size : 13px;
+    text-decoration:none;
 }

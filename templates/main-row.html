@@ -2,35 +2,29 @@
     <td class='lightcolumn'>
         <div class="{{fileicontypeCSS}} icon"></div>
     </td>
-    <td class='darkcolumn'>
+    <td class='lightcolumn'>
         <span class='text'>
             <a class="{{isFolder}}" href='{{action}}?username={{username}}&amp;pathext={{pathext}}{{encodedfile}}/'>{{filename}}</a>
             <span class="{{isFile}}">{{filename}}</span>
         </span>
     </td>
-    <td class='lightcolumn'>
+    <td class='darkcolumn'>
         <span class='text'>{{filetype}}</span>
     </td>
-    <td class='darkcolumn'>
+    <td class='lightcolumn'>
         <span class='text'>{{filedata}}</span>
     </td>
-    <td class='lightcolumn'>
+    <td class='darkcolumn'>
         <span class='text'>{{modified}}</span>
     </td>
-    <td class='darkcolumn'>
-        <a class="{{showView}}" href='{{baseUrl}}{{pathext}}{{encodedfile}}' target='_blank'>View</a>
-    </td>
     <td class='lightcolumn'>
-        <a class="{{showDelete}}" href="javascript:var c=confirm('Delete \'{{encodedfile}}\' ?'); if(c) document.location='{{action}}?delete={{encodedfile}}&amp;username={{username}}&amp;pathext={{pathext}}'">Delete</a>
-    </td>
-    <td class='darkcolumn'>
-        <a class="{{showEdit}}" href='{{action}}?edit={{encodedfile}}&amp;u={{u}}&amp;pathext={{pathext}}'>Edit</a>
-        <a class="{{showUnzip}}" href="javascript:var c=prompt('Unzip \'{{encodedfile}}\' to'); if(c) document.location='{{action}}?unzip={{encodedfile}}&amp;newname=' + c + '&amp;username={{username}}&amp;pathext={{pathext}}'">Unzip</a>
-    </td>
-    <td class='lightcolumn'>
-        <a href="javascript:var c=prompt('Rename \'{{encodedfile}}\' to'); if(c) document.location='{{action}}?rename={{encodedfile}}&amp;newname=' + c + '&amp;username={{username}}&amp;pathext={{pathext}}'">Rename</a>
+        <a class="{{showDelete}}" href="javascript:var c=confirm('Delete \'{{encodedfile}}\' ?'); if(c) document.location='{{action}}?delete={{encodedfile}}&amp;username={{username}}&amp;pathext={{pathext}}'"><img src="images/delete.gif"/>Delete </a>
+        <a href="javascript:var c=prompt('Rename \'{{encodedfile}}\' to'); if(c) document.location='{{action}}?rename={{encodedfile}}&amp;newname=' + c + '&amp;username={{username}}&amp;pathext={{pathext}}'"><img src="images/rename.gif"/> Rename</a>
+        <a class="{{showView}}" href='{{baseUrl}}{{pathext}}{{encodedfile}}' target='_blank'><img src="images/download.gif"/> Download</a>
+        <a class="{{showEdit}}" href='{{action}}?edit={{encodedfile}}&amp;u={{u}}&amp;pathext={{pathext}}'><img src="images/edit.gif"/> Edit</a>
+<a class="{{showUnzip}}" href="javascript:var c=prompt('Unzip \'{{encodedfile}}\' to'); if(c) document.location='{{action}}?unzip={{encodedfile}}&amp;newname=' + c + '&amp;username={{username}}&amp;pathext={{pathext}}'"><img src="images/unzip.gif"/> Unzip</a>
     </td>
 </tr>
-<tr class='darkline'>
-    <td colspan='9' height='1'></td>
+<tr class='line'>
+    <td colspan='6' height='1'></td>
 </tr>

@@ -45,11 +45,11 @@ Setup
 Screenshots
 =========
 
-<img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/File%20Upload.png" />
-<img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/Deletion%20Error.png" />
-<img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/Deletion%20Success.png" />
-<img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/Folder%20Creation.png" />
-<img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/Unzip.png" />
+<img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/Login%20Screen.png" />
+<img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/File%20Listing.png" />
+<img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/File%20Deletion.png" />
+<img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/File%20Unzip.png" />
+<img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/Error%20Message.png" />
 <img src="https://raw.github.com/khilnani/xqto-filemanager/master/screenshots/File%20Edit.png" />
 
 
