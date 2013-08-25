@@ -1,34 +1,44 @@
-a:link {
-    color: #666666;
+table.mainTable {
+    background: #eeeeee;
+    border: 0;
+    width: 100%;
+}
+tr.header {
+    background: #333333;
+}
+tr.line {
+    background: #999999;
+}
+tr.darkline {
+    background: #000000;
+}
+td.lightcolumn {
+    background: #ffffff;
     font-family : Verdana, Arial;
     font-size : 13px;
+    font-weight: normal;
+    color: #333333;
+    height: 20px;
 }
-a:visited {
-    color: #666666;
+td.darkcolumn {
+    background: #eeeeee;
     font-family : Verdana, Arial;
     font-size : 13px;
+    font-weight: normal;
+    color: #333333;
+    height: 20px;
 }
-a:hover {
-    color: #666666;
-    font-family : Verdana, Arial;
-    font-size : 13px;
-}
-a:active {
-    color: #666666;
-    font-family : Verdana, Arial;
-    font-size : 13px;
-}
-input.wf {
+input.mainTable {
     font-size: 11px;
     background-color: #ffffff;
 }
-span.wf-text {
+span.text {
     font-family : Verdana, Arial;
     font-size : 13px;
     font-weight: normal;
     color: #333333;
 }
-span.wf-error {
+span.error {
     text-align:center;
     display: block;
     padding: 10px;
@@ -38,7 +48,7 @@ span.wf-error {
     color: #ffffff;
     background: #ff0000;
 }
-span.wf-info {
+span.info {
     text-align:center;
     display: block;
     padding: 10px;
@@ -48,7 +58,7 @@ span.wf-info {
     color: #333333;
     background: #f5f500;
 }
-span.wf-success {
+span.success {
     text-align:center;
     display: block;
     padding: 10px;
@@ -58,53 +68,23 @@ span.wf-success {
     color: #ffffff;
     background: #0a8a0a;
 }
-span.wf-heading {
+span.title {
     font-family : Verdana, Arial;
     font-size : 17px;
     font-weight: bold;
     color: #333333;
 }
-span.wf-label {
+span.label {
     font-family : Verdana, Arial;
     font-size : 13px;
     font-weight: bold;
     color: #333333;
 }
-span.wf-headingrow {
+span.hrow {
     font-family : Verdana, Arial;
     font-size : 13px;
     font-weight: bold;
     color: #ffffff;
-}
-table.wf {
-    background: #eeeeee;
-    border: 0;
-    width: 100%;
-}
-tr.wf-heading {
-    background: #333333;
-}
-tr.wf-line {
-    background: #999999;
-}
-tr.wf-darkline {
-    background: #000000;
-}
-td.wf-lightcolumn {
-    background: #ffffff;
-    font-family : Verdana, Arial;
-    font-size : 13px;
-    font-weight: normal;
-    color: #333333;
-    height: 20px;
-}
-td.wf-darkcolumn {
-    background: #eeeeee;
-    font-family : Verdana, Arial;
-    font-size : 13px;
-    font-weight: normal;
-    color: #333333;
-    height: 20px;
 }
 .textarea {
     width:90%;
@@ -132,4 +112,33 @@ td.wf-darkcolumn {
 }
 .hide {
     display: none;
+}
+.alignleft {
+    float: left;
+}
+.alignright {
+    float: right;
+}
+.maxWidth {
+    width:100%;
+}
+a:link {
+    color: #666666;
+    font-family : Verdana, Arial;
+    font-size : 13px;
+}
+a:visited {
+    color: #666666;
+    font-family : Verdana, Arial;
+    font-size : 13px;
+}
+a:hover {
+    color: #666666;
+    font-family : Verdana, Arial;
+    font-size : 13px;
+}
+a:active {
+    color: #666666;
+    font-family : Verdana, Arial;
+    font-size : 13px;
 }

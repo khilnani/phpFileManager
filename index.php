@@ -140,7 +140,6 @@ else
         $tmplData['{{pathext}}'] = $_REQUEST['pathext'];
         $tmplData['{{editingFile}}'] = $_GET['edit'];
         $tmplData['{{oldcontent}}'] =  $oldcontent;
-        $tmplData['{{u}}'] = $_POST[u];
 
         renderEdit($tmplData);
 	}
@@ -540,7 +539,7 @@ function doLogin(&$tmplData)
 {
     global $ini, $_POST, $_SESSION;
     
-    if(!($_POST['u'] == $ini['userName'] && $_POST['password'] == $ini['password'])) 
+    if(!($_POST['username'] == $ini['userName'] && $_POST['password'] == $ini['password'])) 
     {
 		error($tmplData, "The login details were incorrect");
         return false;
@@ -598,19 +597,19 @@ function rrmdir($dir)
 function error(&$tmplData, $msg)
 {
     //echo "ERROR: " . $msg;
-    $tmplData['{{msg}}'] = "<span class='wf-error'>" . $msg . "</span><br /><br />";
+    $tmplData['{{msg}}'] = "<span class='error'>" . $msg . "</span><br /><br />";
 }
 
 function success(&$tmplData, $msg)
 {
     //echo "OK: " . $msg;
-    $tmplData['{{msg}}'] = "<span class='wf-success'>" . $msg . "</span><br /><br />";
+    $tmplData['{{msg}}'] = "<span class='success'>" . $msg . "</span><br /><br />";
 }
 
 function info(&$tmplData, $msg)
 {
     //echo "INFO: " . $msg;
-    $tmplData['{{msg}}'] = "<span class='wf-info'>" . $msg . "</span><br /><br />";
+    $tmplData['{{msg}}'] = "<span class='info'>" . $msg . "</span><br /><br />";
 }
 
 //-----------------------------------------------------------------------------
@@ -648,11 +647,11 @@ class Template
         global $ini, $_SERVER, $baseUrl, $maxfilesize;
     
         $tmplData = array();
-        $tmplData['{{heading}}'] = $ini['heading'];
+        $tmplData['{{title}}'] = $ini['title'];
         $tmplData['{{action}}'] = $_SERVER[PHP_SELF];
         $tmplData['{{baseUrl}}'] = $baseUrl;
         $tmplData['{{maxfilesize}}'] = $maxfilesize;
-        $tmplData['{{u}}'] = $_REQUEST[u];
+        $tmplData['{{username}}'] = $_REQUEST[username];
         $tmplData['{{msg}}'] = "";
         return $tmplData;
     }

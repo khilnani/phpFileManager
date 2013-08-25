@@ -1,38 +1,36 @@
 <tr>
-    <td class='wf-lightcolumn'>
-    <div class="{{fileicontypeCSS}} icon">
-    </div>
+    <td class='lightcolumn'>
+        <div class="{{fileicontypeCSS}} icon"></div>
     </td>
-    <td class='wf-darkcolumn'>
-        <span class='wt-text'>
-            <a class="{{isFolder}}" href='{{action}}?u={{u}}&amp;pathext={{pathext}}{{encodedfile}}/'>{{filename}}</a>
+    <td class='darkcolumn'>
+        <span class='text'>
+            <a class="{{isFolder}}" href='{{action}}?username={{username}}&amp;pathext={{pathext}}{{encodedfile}}/'>{{filename}}</a>
             <span class="{{isFile}}">{{filename}}</span>
-        </span>    
+        </span>
     </td>
-    <td class='wf-lightcolumn'>
-        <span class='wt-text'>{{filetype}}</span>
+    <td class='lightcolumn'>
+        <span class='text'>{{filetype}}</span>
     </td>
-    <td class='wf-darkcolumn'>
-        <span class='wt-text'>{{filedata}}</span>
+    <td class='darkcolumn'>
+        <span class='text'>{{filedata}}</span>
     </td>
-    <td class='wf-lightcolumn'>
-        <span class='wt-text'>{{modified}}</span>
+    <td class='lightcolumn'>
+        <span class='text'>{{modified}}</span>
     </td>
-    <td class='wf-darkcolumn'>
-        <a class="{{showView}}" href='{{baseUrl}}{{pathext}}{{encodedfile}}' target='_blank'>VIEW</a>
+    <td class='darkcolumn'>
+        <a class="{{showView}}" href='{{baseUrl}}{{pathext}}{{encodedfile}}' target='_blank'>View</a>
     </td>
-    <td class='wf-lightcolumn'>
-        <a class="{{showDelete}}" href="javascript:var c=confirm('Delete \'{{encodedfile}}\' ?'); if(c) document.location='{{action}}?delete={{encodedfile}}&amp;u={{u}}&amp;pathext={{pathext}}'">DELETE</a>
+    <td class='lightcolumn'>
+        <a class="{{showDelete}}" href="javascript:var c=confirm('Delete \'{{encodedfile}}\' ?'); if(c) document.location='{{action}}?delete={{encodedfile}}&amp;username={{username}}&amp;pathext={{pathext}}'">Delete</a>
     </td>
-    <td class='wf-darkcolumn'>
-        <a class="{{showEdit}}" href='{{action}}?edit={{encodedfile}}&amp;u={{u}}&amp;pathext={{pathext}}'>EDIT</a>
-        <a class="{{showUnzip}}" href="javascript:var c=prompt('Unzip \'{{encodedfile}}\' to'); if(c) document.location='{{action}}?unzip={{encodedfile}}&amp;newname=' + c + '&amp;u={{u}}&amp;pathext={{pathext}}'">UNZIP</a>
+    <td class='darkcolumn'>
+        <a class="{{showEdit}}" href='{{action}}?edit={{encodedfile}}&amp;u={{u}}&amp;pathext={{pathext}}'>Edit</a>
+        <a class="{{showUnzip}}" href="javascript:var c=prompt('Unzip \'{{encodedfile}}\' to'); if(c) document.location='{{action}}?unzip={{encodedfile}}&amp;newname=' + c + '&amp;username={{username}}&amp;pathext={{pathext}}'">Unzip</a>
     </td>
-    <td class='wf-lightcolumn'>
-        <a href="javascript:var c=prompt('Rename \'{{encodedfile}}\' to'); if(c) document.location='{{action}}?rename={{encodedfile}}&amp;newname=' + c + '&amp;u={{u}}&amp;pathext={{pathext}}'">RENAME</a>
+    <td class='lightcolumn'>
+        <a href="javascript:var c=prompt('Rename \'{{encodedfile}}\' to'); if(c) document.location='{{action}}?rename={{encodedfile}}&amp;newname=' + c + '&amp;username={{username}}&amp;pathext={{pathext}}'">Rename</a>
     </td>
 </tr>
-<tr class='wf-darkline'>
+<tr class='darkline'>
     <td colspan='9' height='1'></td>
 </tr>
-

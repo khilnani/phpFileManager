@@ -4,10 +4,29 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"
         />
-        <title>{{heading}}</title>
+        <title>{{title}}</title>
         <link rel="stylesheet" type="text/css" href="css/styles.css">
     </head>
     
-    <body bgcolor="#FFFFFF">{{content}}</body>
+    <body bgcolor="#FFFFFF">
+        <table class='mainTable' border='0' cellspacing='0' cellpadding='20' width='100%'
+        align='center'>
+            <tr>
+                <td>
+                    <div class="maxWidth">
+                        <span class='alignleft title'>{{title}}</span>
+                        <span class="alignright">
+                            <a href='{{action}}?logoff=1'>Log Off</a>
+                        </span>
+                        <span style="clear: both;"></span>
+                    </div>
+                    <br />
+                    <br />
+                    {{msg}}
+                    {{content}}
+                </td>
+            </tr>
+        </table>
+    </body>
 
 </html>
