@@ -41,9 +41,11 @@ $path = $ini['basePath'];  // directory path, must end with a '/'
 $baseUrl = $ini['baseUrl'];  // Url to match the basePath above
 $type = $ini['fileTypes'];
 
-$arrowiconImage = "<img alt='Back' src='data:image/gif;base64,R0lGODlhCgALAJECALS0tAAAAP///wAAACH5BAEAAAIALAAAAAAKAAsAAAIblBOmB5AbWnsiynnQRBCv6nUOwoGXw5wPyQYFADs=' />";
-$fileiconImage = "<img alt='' src='data:image/gif;base64,R0lGODlhCwANAJECAAAAAP///////wAAACH5BAEAAAIALAAAAAALAA0AAAIchG+iEO0pmGsMxEkRnmY/6XVeIIbgVqInhrRHAQA7' />";
-$foldericonImage = "<img alt='' src='data:image/gif;base64,R0lGODlhDwANAKIGAMfHx5eXlwAAAEhISOfn5+/v7////wAAACH5BAEAAAYALAAAAAAPAA0AAAM0aDbMohCOQggA48UVug9Ns1RkWQGBMFhX66Iq+7rpOr+1fMP2fuW+XyzI+xg/D4FyyWQmAAA7' />";
+$fileiconCSS = $ini['fileIconCSS'];
+$foldericonCSS = $ini['folderIconCSS'];
+
+$hideCSS = $ini['hideCSS'];
+$showCSS = $ini['showCSS'];
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -54,7 +56,7 @@ $tmplData = Template::init();
 
 
 if(strpos($_REQUEST['pathext'],'..') !== false) {
-	exit;
+    exit;
 }
 if(strpos($_REQUEST['delete'],'..') !== false) {
 	exit;
@@ -62,6 +64,7 @@ if(strpos($_REQUEST['delete'],'..') !== false) {
 if(strpos($_REQUEST['delete'],'/') !== false) {
 	exit;
 }
+
 
 //-----------------------------------------------------------------------------
 
@@ -311,31 +314,27 @@ else
     //-----------------------------------------------------------------------------
 
     $content = '';
+    $tmplData['{{pathext}}'] = $_REQUEST['pathext'];   
         
 	// if $makediron has been set to on show some html for making directories
 	if($makediron === true) 
     {
-		$tmplData['{{displayCreateFolder}}'] = "inline";
+		$tmplData['{{displayCreateFolder}}'] = $showCSS;
 	}
     else
     {
-        $tmplData['{{displayCreateFolder}}'] = "none";
-    }
-        
-    $tmplData['{{maxfilesize}}'] = $maxfilesize;
-    $tmplData['{{u}}'] = $_REQUEST[u];
-    $tmplData['{{pathext}}'] = $_REQUEST['pathext'];    
-    $tmplData['{{arrowiconImage}}']  = $arrowiconImage;
+        $tmplData['{{displayCreateFolder}}'] = $hideCSS;
+    } 
         
     // if the current directory is a sub directory show a back 
     // link to get back to the previous directory
     if($_REQUEST['pathext'] != '') 
     {
-		$tmplData['{{displayBackLink}}'] = "visible";
+		$tmplData['{{displayBackLink}}'] = $showCSS;
 	}
     else
     {
-        $tmplData['{{displayBackLink}}'] = "hidden";
+        $tmplData['{{displayBackLink}}'] = $hideCSS;
     }
     
     //-----------------------------------------------------------------------------
@@ -387,10 +386,13 @@ else
                 // get some info about the file
 				$filedata = stat($path.$_REQUEST['pathext'].$file); 
 				$encodedfile = rawurlencode($file);
-
-				// find out if the file is one that can be edited
-				$editlink = '';
 				
+				$showEdit = false;
+    			$showView = true;
+				$showDelete = true;
+                $showUnzip = false;
+				
+                // find out if the file is one that can be edited
                 // if the edit function is turned on and the file is not a directory
                 if($editon === true && !is_dir($path.$_REQUEST['pathext'].$file)) 
                 { 
@@ -400,46 +402,42 @@ else
 						$ext = substr($file, ($dotpos+1));
 						if(strcmp( strtolower( $ext ) , $editext) == 0) 
                         {
-							$editlink = "&nbsp;<a href='$_SERVER[PHP_SELF]?edit=$encodedfile&amp;u=$_REQUEST[u]&amp;pathext=$_REQUEST[pathext]'>EDIT</a>&nbsp;";
+							$showEdit = true;
 						}
 					}
 				}
 
-				// create some html for a link to download files 
-				$downloadlink = "<a href='" . $baseUrl.$_REQUEST[pathext].$encodedfile . "' target='_blank'>VIEW</a>";
-				// create some html for a link to delete files 
-				$deletelink = "<a href=\"javascript:var c=confirm('Delete \'" . $encodedfile  . "\' ?'); if(c) document.location='$_SERVER[PHP_SELF]?delete=$encodedfile&amp;u=$_REQUEST[u]&amp;pathext=$_REQUEST[pathext]'\">DELETE</a>";
-                $renamelink = "<a href=\"javascript:var c=prompt('Rename \'" . $encodedfile  . "\' to'); if(c) document.location='$_SERVER[PHP_SELF]?rename=$encodedfile&amp;newname=' + c + '&amp;u=$_REQUEST[u]&amp;pathext=$_REQUEST[pathext]'\">RENAME</a>";
-                $unziplink = "<a href=\"javascript:var c=prompt('Unzip \'" . $encodedfile  . "\' to'); if(c) document.location='$_SERVER[PHP_SELF]?unzip=$encodedfile&amp;newname=' + c + '&amp;u=$_REQUEST[u]&amp;pathext=$_REQUEST[pathext]'\">UNZIP</a>";
+
 
                 // if it is a directory change the file name to a directory link
                 if(is_dir($path.$_REQUEST['pathext'].$file)) 
                 {
-					$filename = "<a href='$_SERVER[PHP_SELF]?u=$_REQUEST[u]&amp;pathext=$_REQUEST[pathext]$encodedfile/'>$file</a>";
-					$fileicon = "&nbsp;" . $foldericonImage . "&nbsp;";
+					$isFolder = true;
+					$fileicontypeCSS = $foldericonCSS;
 					$downloadlink = '';
 					$filedata[7] = '';
 					$modified = '';
 					$filetype = '';
 					if($deletediron === false) 
                     {
-						$deletelink = '';
+						$showDelete = false;
 					}
-					$tmpeditlink = "";
+					$showEdit = false;
+                    $showView = false;
 				}
                 else 
                 {
-					$filename = $file;
-					$fileicon = "&nbsp;" . $fileiconImage . "&nbsp;";
+					$isFolder = false;
+					$fileicontypeCSS = $fileiconCSS;
 
 					$pathparts = pathinfo($file);
 					$filetype = $type[ strtolower($pathparts['extension']) ];
 
-					$tmpeditlink = $editlink;
 
                     if( strtolower( $pathparts['extension'] ) == 'zip') 
                     {
-                        $tmpeditlink = $unziplink;
+                        $showUnzip = true;
+                        $showEdit = false;
                     }
 
                     $modified = date('d-M-y g:ia',$filedata[9]);
@@ -482,15 +480,18 @@ else
 				// append 2 table rows to the $content variable, the first row has the file
 				// informtation, the 2nd row makes a black line 1 pixel high
                         
-                $tmplData['{{fileicon}}'] = $fileicon;
-                $tmplData['{{filename}}'] = $filename;
+                $tmplData['{{fileicontypeCSS}}'] = $fileicontypeCSS;
+                $tmplData['{{filename}}'] = $file;                 
+                $tmplData['{{isFolder}}'] = ($isFolder) ? $showCSS : $hideCSS;
+                $tmplData['{{isFile}}'] = ($isFolder) ? $hideCSS : $showCSS;
+                $tmplData['{{encodedfile}}'] = $encodedfile;
                 $tmplData['{{filetype}}'] = $filetype;
                 $tmplData['{{filedata}}'] = $filedata[7];
                 $tmplData['{{modified}}'] = $modified;
-                $tmplData['{{downloadlink}}'] = $downloadlink;
-                $tmplData['{{deletelink}}'] = $deletelink;
-                $tmplData['{{tmpeditlink}}'] = $tmpeditlink;
-                $tmplData['{{renamelink}}'] = $renamelink;
+                $tmplData['{{showView}}'] = ($showView) ? $showCSS : $hideCSS;
+                $tmplData['{{showDelete}}'] = ($showDelete) ? $showCSS : $hideCSS;
+                $tmplData['{{showEdit}}'] = ($showEdit) ? $showCSS : $hideCSS;
+                $tmplData['{{showUnzip}}'] = ($showUnzip) ? $showCSS : $hideCSS;
 
 				$content .= Template::render($ini['mainRowTemplate'], $tmplData);
 			}
@@ -644,11 +645,14 @@ class Template
 {
     static public function init()
     {
-        global $ini, $_SERVER;
+        global $ini, $_SERVER, $baseUrl, $maxfilesize;
     
         $tmplData = array();
         $tmplData['{{heading}}'] = $ini['heading'];
         $tmplData['{{action}}'] = $_SERVER[PHP_SELF];
+        $tmplData['{{baseUrl}}'] = $baseUrl;
+        $tmplData['{{maxfilesize}}'] = $maxfilesize;
+        $tmplData['{{u}}'] = $_REQUEST[u];
         $tmplData['{{msg}}'] = "";
         return $tmplData;
     }

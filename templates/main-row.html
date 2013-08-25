@@ -1,18 +1,38 @@
 <tr>
-    <td class='wf-lightcolumn'>{{fileicon}}</td>
-    <td class='wf-darkcolumn'>&nbsp;
-        <span class='wt-text'>{{filename}}</span>&nbsp;</td>
-    <td class='wf-lightcolumn'>&nbsp;
-        <span class='wt-text'>{{filetype}}</span>&nbsp;</td>
-    <td class='wf-darkcolumn'>&nbsp;
-        <span class='wt-text'>{{filedata}}</span>&nbsp;</td>
-    <td class='wf-lightcolumn'>&nbsp;
-        <span class='wt-text'>{{modified}}</span>&nbsp;</td>
-    <td class='wf-darkcolumn'>&nbsp;{{downloadlink}}&nbsp;</td>
-    <td class='wf-lightcolumn'>&nbsp;{{deletelink}}&nbsp;</td>
-    <td class='wf-darkcolumn'>&nbsp;{{tmpeditlink}}&nbsp;</td>
-    <td class='wf-lightcolumn'>&nbsp;{{renamelink}}&nbsp;</td>
+    <td class='wf-lightcolumn'>
+    <div class="{{fileicontypeCSS}} icon">
+    </div>
+    </td>
+    <td class='wf-darkcolumn'>
+        <span class='wt-text'>
+            <a class="{{isFolder}}" href='{{action}}?u={{u}}&amp;pathext={{pathext}}{{encodedfile}}/'>{{filename}}</a>
+            <span class="{{isFile}}">{{filename}}</span>
+        </span>    
+    </td>
+    <td class='wf-lightcolumn'>
+        <span class='wt-text'>{{filetype}}</span>
+    </td>
+    <td class='wf-darkcolumn'>
+        <span class='wt-text'>{{filedata}}</span>
+    </td>
+    <td class='wf-lightcolumn'>
+        <span class='wt-text'>{{modified}}</span>
+    </td>
+    <td class='wf-darkcolumn'>
+        <a class="{{showView}}" href='{{baseUrl}}{{pathext}}{{encodedfile}}' target='_blank'>VIEW</a>
+    </td>
+    <td class='wf-lightcolumn'>
+        <a class="{{showDelete}}" href="javascript:var c=confirm('Delete \'{{encodedfile}}\' ?'); if(c) document.location='{{action}}?delete={{encodedfile}}&amp;u={{u}}&amp;pathext={{pathext}}'">DELETE</a>
+    </td>
+    <td class='wf-darkcolumn'>
+        <a class="{{showEdit}}" href='{{action}}?edit={{encodedfile}}&amp;u={{u}}&amp;pathext={{pathext}}'>EDIT</a>
+        <a class="{{showUnzip}}" href="javascript:var c=prompt('Unzip \'{{encodedfile}}\' to'); if(c) document.location='{{action}}?unzip={{encodedfile}}&amp;newname=' + c + '&amp;u={{u}}&amp;pathext={{pathext}}'">UNZIP</a>
+    </td>
+    <td class='wf-lightcolumn'>
+        <a href="javascript:var c=prompt('Rename \'{{encodedfile}}\' to'); if(c) document.location='{{action}}?rename={{encodedfile}}&amp;newname=' + c + '&amp;u={{u}}&amp;pathext={{pathext}}'">RENAME</a>
+    </td>
 </tr>
 <tr class='wf-darkline'>
     <td colspan='9' height='1'></td>
 </tr>
+

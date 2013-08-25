@@ -1,23 +1,135 @@
-a:link { color: #666666; font-family : Verdana, Arial; font-size : 13px; }
-a:visited {color: #666666; font-family : Verdana, Arial; font-size : 13px; }
-a:hover {color: #666666; font-family : Verdana, Arial; font-size : 13px; }
-a:active {color: #666666; font-family : Verdana, Arial; font-size : 13px; }
-
-input.wf { font-size: 11px; background-color: #ffffff; }
-
-span.wf-text { font-family : Verdana, Arial; font-size : 13px; font-weight: normal; color: #333333; }
-span.wf-error { text-align:center; display: block; padding: 10px; font-family : Verdana, Arial; font-size : 13px; font-weight: normal; color: #ffffff; background: #ff0000; }
-span.wf-info { text-align:center; display: block; padding: 10px; font-family : Verdana, Arial; font-size : 13px; font-weight: normal; color: #333333; background: #f5f500; }
-span.wf-success { text-align:center; display: block; padding: 10px; font-family : Verdana, Arial; font-size : 13px; font-weight: normal; color: #ffffff; background: #0a8a0a; }
-span.wf-heading { font-family : Verdana, Arial; font-size : 17px; font-weight: bold; color: #333333; }
-span.wf-label { font-family : Verdana, Arial; font-size : 13px; font-weight: bold; color: #333333; }
-span.wf-headingrow { font-family : Verdana, Arial; font-size : 13px; font-weight: bold; color: #ffffff; }
-
-table.wf { background: #eeeeee; border: 0; width: 100%; }
-tr.wf-heading { background: #333333; }
-tr.wf-line { background: #999999; }
-tr.wf-darkline { background: #000000; }
-td.wf-lightcolumn { background: #ffffff; font-family : Verdana, Arial; font-size : 13px; font-weight: normal; color: #333333; height: 20px; }
-td.wf-darkcolumn { background: #eeeeee; font-family : Verdana, Arial; font-size : 13px; font-weight: normal; color: #333333; height: 20px;}
-.textarea { width:90%; height: 600px; padding: 10px; margin: 10px; border: 1px solid #ccc; }
-
+a:link {
+    color: #666666;
+    font-family : Verdana, Arial;
+    font-size : 13px;
+}
+a:visited {
+    color: #666666;
+    font-family : Verdana, Arial;
+    font-size : 13px;
+}
+a:hover {
+    color: #666666;
+    font-family : Verdana, Arial;
+    font-size : 13px;
+}
+a:active {
+    color: #666666;
+    font-family : Verdana, Arial;
+    font-size : 13px;
+}
+input.wf {
+    font-size: 11px;
+    background-color: #ffffff;
+}
+span.wf-text {
+    font-family : Verdana, Arial;
+    font-size : 13px;
+    font-weight: normal;
+    color: #333333;
+}
+span.wf-error {
+    text-align:center;
+    display: block;
+    padding: 10px;
+    font-family : Verdana, Arial;
+    font-size : 13px;
+    font-weight: normal;
+    color: #ffffff;
+    background: #ff0000;
+}
+span.wf-info {
+    text-align:center;
+    display: block;
+    padding: 10px;
+    font-family : Verdana, Arial;
+    font-size : 13px;
+    font-weight: normal;
+    color: #333333;
+    background: #f5f500;
+}
+span.wf-success {
+    text-align:center;
+    display: block;
+    padding: 10px;
+    font-family : Verdana, Arial;
+    font-size : 13px;
+    font-weight: normal;
+    color: #ffffff;
+    background: #0a8a0a;
+}
+span.wf-heading {
+    font-family : Verdana, Arial;
+    font-size : 17px;
+    font-weight: bold;
+    color: #333333;
+}
+span.wf-label {
+    font-family : Verdana, Arial;
+    font-size : 13px;
+    font-weight: bold;
+    color: #333333;
+}
+span.wf-headingrow {
+    font-family : Verdana, Arial;
+    font-size : 13px;
+    font-weight: bold;
+    color: #ffffff;
+}
+table.wf {
+    background: #eeeeee;
+    border: 0;
+    width: 100%;
+}
+tr.wf-heading {
+    background: #333333;
+}
+tr.wf-line {
+    background: #999999;
+}
+tr.wf-darkline {
+    background: #000000;
+}
+td.wf-lightcolumn {
+    background: #ffffff;
+    font-family : Verdana, Arial;
+    font-size : 13px;
+    font-weight: normal;
+    color: #333333;
+    height: 20px;
+}
+td.wf-darkcolumn {
+    background: #eeeeee;
+    font-family : Verdana, Arial;
+    font-size : 13px;
+    font-weight: normal;
+    color: #333333;
+    height: 20px;
+}
+.textarea {
+    width:90%;
+    height: 600px;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #ccc;
+}
+.icon {
+    height: 15px;
+    width: 15px;
+    padding-left: 5px;
+}
+.iconBack {
+    background: url('../images/back.gif') no-repeat center;
+}
+.iconFile {
+    background: url('../images/file.gif') no-repeat center;
+}
+.iconFolder {
+    background: url('../images/folder.gif') no-repeat center;
+}
+.show {
+    display: inline;
+}
+.hide {
+    display: none;
+}
