@@ -8,7 +8,7 @@
                 <br />{{msg}}
                 <form name='form1' method='post' action='{{action}}' enctype='multipart/form-data'>
                     <input type='hidden' name='MAX_FILE_SIZE' value='{{maxfilesize}}' />
-                    <span style="display: {{displayCreateFolder}};">
+                    <span class="{{displayCreateFolder}}">
                         <span class='wf-label'>Create a Folder:</span>
                         <input type='text' name='dirname' size='15' />
                         <input type='submit' name='mkdir' value='Create' />
@@ -24,16 +24,16 @@
                     <tr class='wf-heading'>
                         <td width='25'>&nbsp;</td>
                         <td>
-                            <span class='wf-headingrow'>&nbsp;FILENAME&nbsp;</span>
+                            <span class='wf-headingrow'>FILENAME</span>
                         </td>
                         <td>
-                            <span class='wf-headingrow'>&nbsp;TYPE&nbsp;</span>
+                            <span class='wf-headingrow'>TYPE</span>
                         </td>
                         <td>
-                            <span class='wf-headingrow'>&nbsp;SIZE&nbsp;</span>
+                            <span class='wf-headingrow'>SIZE</span>
                         </td>
                         <td>
-                            <span class='wf-headingrow'>&nbsp;LAST MODIFIED&nbsp;</span>
+                            <span class='wf-headingrow'>LAST MODIFIED</span>
                         </td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
@@ -43,19 +43,15 @@
                     <tr class='wf-line'>
                         <td colspan='9' height='2'></td>
                     </tr>
-                    <tr style='visibility: {{displayBackLink}};'>
-                        <td class='wf-lightcolumn'>&nbsp;{{arrowiconImage}}&nbsp;</td>
-                        <td class='wf-darkcolumn'>&nbsp;
-                            <a href='{{action}}?u={{u}}&amp;back=1&amp;pathext={{pathext}}'>&laquo;BACK</a>&nbsp;</td>
-                        <td class='wf-lightcolumn'></td>
-                        <td class='wf-darkcolumn'></td>
-                        <td class='wf-lightcolumn'></td>
-                        <td class='wf-darkcolumn'></td>
-                        <td class='wf-lightcolumn'></td>
-                        <td class='wf-darkcolumn'></td>
-                        <td class='wf-lightcolumn'></td>
+                    <tr class='{{displayBackLink}}'>
+                        <td class='wf-lightcolumn'>
+                            <a class="icon" href='{{action}}?u={{u}}&amp;back=1&amp;pathext={{pathext}}'><img src="images/back.gif"/></a>
+                        </td>
+                        <td colspan='8' class='wf-lightcolumn'>
+                            &nbsp;
+                        </td>
                     </tr>
-                    <tr class='wf-darkline' style='visibility: {{displayBackLink}};'>
+                    <tr class='wf-darkline' class='{{displayBackLink}}'>
                         <td colspan='9' height='1'></td>
                     </tr>
                     {{content}}
