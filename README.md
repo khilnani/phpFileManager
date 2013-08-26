@@ -1,7 +1,15 @@
 _phpFileManager_
 ================
 
-A web based file manager with the features below built using Php
+Just like the in the 1990s, everyone needs a good web file manager. 
+
+Especially useful for cases where you need quick and dirty web file admin for an arbitary folder on a website
+to share photos with friends who are not familiar with FTP or UX designers who are not familiar with FTP 
+but need a place to post Axure prototypes.
+
+This was also a way for me to play with the [Laravel](https://github.com/laravel/laravel) framework.
+
+The web based file manager with the features below built using Php
 
 - Password/authentication. _Can be configured to be enabled/disabled._
 - File Upload. _Can be configured to be enabled/disabled._
