@@ -1,6 +1,6 @@
 <form name='mainForm' method='post' action='{{action}}'>
     <center>
-        <span class='label text'>Edit: '{{pathext}}{{editingFile}}'</span>
+        <span class='label text'>Edit: '{{workingdir}}{{editingFile}}'</span>
         <br />
         <textarea name='newcontent' class='textarea'>{{oldcontent}}</textarea>
         <br />
@@ -9,6 +9,6 @@
         <input type='submit' name='cancel' value='Cancel' />
         <input type='hidden' name='username' value='{{username}}' />
         <input type='hidden' name='savefile' value='{{editingFile}}' />
-        <input type='hidden' name='pathext' value='{{pathext}}' />
+        <input type='hidden' name='workingdir' value='{{workingdir}}' />
     </center>
 </form>

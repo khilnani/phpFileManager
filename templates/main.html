@@ -12,7 +12,7 @@
                 <input type='file' name='uploadedfile' />
                 <input type='submit' name='upload' value='Upload' />
                 <input type='hidden' name='username' value='{{username}}' />
-                <input type='hidden' name='pathext' value='{{pathext}}' />
+                <input type='hidden' name='workingdir' value='{{workingdir}}' />
             </span>
             <span style="clear: both;"></span>
         </div>
@@ -37,7 +37,7 @@
     </tr>
     <tr class='{{displayBackLink}}'>
         <td class='lightcolumn'>
-            <a class="icon" href='{{action}}?username={{username}}&amp;back=1&amp;pathext={{pathext}}'><img src="images/back.gif"/></a>
+            <a class="icon" href='{{action}}?username={{username}}&amp;back=1&amp;workingdir={{workingdir}}'><img src="images/back.gif"/></a>
         </td>
         <td colspan='5' class='lightcolumn'>&nbsp;</td>
     </tr>

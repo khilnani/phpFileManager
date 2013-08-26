@@ -50,21 +50,9 @@ $showCSS = $ini['showCSS'];
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-start();
-
 $tmplData = Template::init();
 
-
-if(strpos($_REQUEST['pathext'],'..') !== false) {
-    exit;
-}
-if(strpos($_REQUEST['delete'],'..') !== false) {
-	exit;
-}
-if(strpos($_REQUEST['delete'],'/') !== false) {
-	exit;
-}
-
+start();
 
 //-----------------------------------------------------------------------------
 
@@ -96,10 +84,10 @@ else
 	// and display the contents of directories which the user 
     // does not have persmission to view 
     //-----------------------------------------------------------------------------
-	if($_REQUEST['pathext'] != '') 
+	if($_REQUEST['workingdir'] != '') 
     {
         // remove the forward or backwards slash from the path
-		$newpath = substr($path.$_REQUEST['pathext'], 0, -1);   
+		$newpath = substr($path.$_REQUEST['workingdir'], 0, -1);   
 		$dir = @opendir($newpath);
 		// if the directory could not be opened
         if($dir == false) 
@@ -116,15 +104,15 @@ else
     //-----------------------------------------------------------------------------
 	if($_GET['back'] != '') 
     { 
-		$_REQUEST['pathext'] = substr($_REQUEST['pathext'],0,-1);
-		$slashpos = strrpos($_REQUEST['pathext'],'/');
+		$_REQUEST['workingdir'] = substr($_REQUEST['workingdir'],0,-1);
+		$slashpos = strrpos($_REQUEST['workingdir'],'/');
 		if($slashpos == 0) 
         {
-			$_REQUEST['pathext'] = '';	
+			$_REQUEST['workingdir'] = '';	
 		}
         else
         {
-			$_REQUEST['pathext'] = substr($_REQUEST['pathext'],0,$slashpos+1);
+			$_REQUEST['workingdir'] = substr($_REQUEST['workingdir'],0,$slashpos+1);
 		}
 	}
 
@@ -133,11 +121,11 @@ else
     //-----------------------------------------------------------------------------
 	if($_GET['edit'] != '') 
     { 
-		$fp = fopen($path.$_REQUEST['pathext'].$_GET['edit'], "r");
-		$oldcontent = fread($fp, filesize($path.$_REQUEST['pathext'].$_GET['edit']));
+		$fp = fopen($path.$_REQUEST['workingdir'].$_GET['edit'], "r");
+		$oldcontent = fread($fp, filesize($path.$_REQUEST['workingdir'].$_GET['edit']));
 		fclose($fp);
 
-        $tmplData['{{pathext}}'] = $_REQUEST['pathext'];
+        $tmplData['{{workingdir}}'] = $_REQUEST['workingdir'];
         $tmplData['{{editingFile}}'] = $_GET['edit'];
         $tmplData['{{oldcontent}}'] =  $oldcontent;
 
@@ -159,9 +147,9 @@ else
 			if($_FILES['uploadedfile']['size'] > 0 && $_FILES['uploadedfile']['size'] < $maxfilesize) 
             {
 				// put the file in the directory
-				move_uploaded_file($_FILES['uploadedfile']['tmp_name'], $path.$_REQUEST['pathext'].$_FILES['uploadedfile']['name']);	
+				move_uploaded_file($_FILES['uploadedfile']['tmp_name'], $path.$_REQUEST['workingdir'].$_FILES['uploadedfile']['name']);	
 
-				success($tmplData, "Uploaded file '" . $_REQUEST['pathext'].$_FILES['uploadedfile']['name']  . "' successfully.");
+				success($tmplData, "Uploaded file '" . $_REQUEST['workingdir'].$_FILES['uploadedfile']['name']  . "' successfully.");
 			}
             else
             {
@@ -184,7 +172,7 @@ else
 		$newcontent = $_POST['newcontent'];
 		$newcontent = stripslashes($newcontent);
         
-		$fp = fopen($path.$_REQUEST['pathext'].$_POST['savefile'], "w");
+		$fp = fopen($path.$_REQUEST['workingdir'].$_POST['savefile'], "w");
 		fwrite($fp, $newcontent);
 		fclose($fp);
         
@@ -197,35 +185,35 @@ else
 	if($_GET['delete'] != '') 
     {
 		// delete the file or directory
-		if(is_dir($path.$_REQUEST['pathext'].$_GET['delete'])) 
+		if(is_dir($path.$_REQUEST['workingdir'].$_GET['delete'])) 
         {    
-            $result = rrmdir($path.$_REQUEST['pathext'].$_GET['delete']);
+            $result = rrmdir($path.$_REQUEST['workingdir'].$_GET['delete']);
 			
             if($result == 0) 
             {
-				error($tmplData, "The folder '" . $_REQUEST['pathext'].$_GET['delete'] . "' could not be deleted. The folder must be empty before you can delete it.");
+				error($tmplData, "The folder '" . $_REQUEST['workingdir'].$_GET['delete'] . "' could not be deleted. The folder must be empty before you can delete it.");
 			}
 			else
 			{
-				success($tmplData, "'" . $_REQUEST['pathext'].$_GET['delete'] . "' deleted successfully.");
+				success($tmplData, "'" . $_REQUEST['workingdir'].$_GET['delete'] . "' deleted successfully.");
 			}
 		}
         else 
         {
-			if(file_exists($path.$_REQUEST['pathext'].$_GET['delete'])) 
+			if(file_exists($path.$_REQUEST['workingdir'].$_GET['delete'])) 
             {
-				if( unlink($path.$_REQUEST['pathext'].$_GET['delete']) )
+				if( unlink($path.$_REQUEST['workingdir'].$_GET['delete']) )
 				{
-	                success($tmplData, "'" . $_REQUEST['pathext'].$_GET['delete'] . "' deleted successfully.");
+	                success($tmplData, "'" . $_REQUEST['workingdir'].$_GET['delete'] . "' deleted successfully.");
 				}
 				else
 				{
-                      error($tmplData, "'" . $_REQUEST['pathext'].$_GET['delete'] . "' could not be deleted.");
+                      error($tmplData, "'" . $_REQUEST['workingdir'].$_GET['delete'] . "' could not be deleted.");
 				}
 			}
 			else
 			{
-				info($tmplData, "Somebody deleted '" . $_REQUEST['pathext'].$_GET['delete'] . "' before I could.");
+				info($tmplData, "Somebody deleted '" . $_REQUEST['workingdir'].$_GET['delete'] . "' before I could.");
 			}
 		}
 	}
@@ -239,13 +227,13 @@ else
         {
             error($tmplData, "Unable to rename. Invalid filename '" . $_GET['newname'] . "'.");
         }
-		elseif( file_exists($path.$_REQUEST['pathext'].$_GET['newname']) )
+		elseif( file_exists($path.$_REQUEST['workingdir'].$_GET['newname']) )
 		{
 			error($tmplData, "Unable to rename '" . $_GET['rename'] . "'. '" . $_GET['newname'] . "' already exists.");
 		}
         else
 		{
-			$result = @rename ($path.$_REQUEST['pathext'].$_GET['rename'], $path.$_REQUEST['pathext'].$_GET['newname']);
+			$result = @rename ($path.$_REQUEST['workingdir'].$_GET['rename'], $path.$_REQUEST['workingdir'].$_GET['newname']);
             
             if($result == 0) 
 			{
@@ -267,13 +255,13 @@ else
 	    {
 			error($tmplData, "Unable to unzip. Invalid filename '" . $_GET['newname'] . "'.");
 		}
-		elseif( file_exists($path.$_REQUEST['pathext'].$_GET['newname']) )
+		elseif( file_exists($path.$_REQUEST['workingdir'].$_GET['newname']) )
         {
             error($tmplData, "The directory '" . $_GET['newname'] . "' already exists.");
         }
         else
         {
-			if (@exec("unzip -n ". $path.$_REQUEST['pathext'].$_GET['unzip'] ." -d ". $path.$_REQUEST['pathext'].$_GET['newname'])) 
+			if (@exec("unzip -n ". $path.$_REQUEST['workingdir'].$_GET['unzip'] ." -d ". $path.$_REQUEST['workingdir'].$_GET['newname'])) 
             {
 				success($tmplData, "'" . $_GET['unzip'] . "' successfully unzipped to '" . $_GET['newname'] . "'.");
 			}
@@ -289,9 +277,9 @@ else
     //-----------------------------------------------------------------------------
 	if($_POST['mkdir'] != '' && $makediron === true) 
     { 
-		if(strpos($path.$_REQUEST['pathext'].$_POST['dirname'],'//') === false ) 
+		if(strpos($path.$_REQUEST['workingdir'].$_POST['dirname'],'//') === false ) 
         {
-			$result = @mkdir($path.$_REQUEST['pathext'].$_POST['dirname'], $newdirpermissions);
+			$result = @mkdir($path.$_REQUEST['workingdir'].$_POST['dirname'], $newdirpermissions);
 			
             if($result == 0) 
             {
@@ -299,7 +287,7 @@ else
 			}
 			else
             {
-				success($tmplData, "Created folder '" . $_REQUEST['pathext'].$_POST['dirname'] . "'");
+				success($tmplData, "Created folder '" . $_REQUEST['workingdir'].$_POST['dirname'] . "'");
 			}
 		}
 		else 
@@ -313,7 +301,7 @@ else
     //-----------------------------------------------------------------------------
 
     $content = '';
-    $tmplData['{{pathext}}'] = $_REQUEST['pathext'];   
+    $tmplData['{{workingdir}}'] = $_REQUEST['workingdir'];   
         
 	// if $makediron has been set to on show some html for making directories
 	if($makediron === true) 
@@ -327,7 +315,7 @@ else
         
     // if the current directory is a sub directory show a back 
     // link to get back to the previous directory
-    if($_REQUEST['pathext'] != '') 
+    if($_REQUEST['workingdir'] != '') 
     {
 		$tmplData['{{displayBackLink}}'] = $showCSS;
 	}
@@ -340,7 +328,7 @@ else
  
 	// build the table rows which contain the file information
     // remove the forward or backwards slash from the path
-	$newpath = substr($path.$_REQUEST['pathext'], 0, -1);   
+	$newpath = substr($path.$_REQUEST['workingdir'], 0, -1);   
 	
     // open the directory
     $dir = @opendir($newpath); 
@@ -357,9 +345,9 @@ else
 
 		// check to see if the file is a directory and if it can be opened, if not hide it
 		$hiddendir = 0;
-		if(is_dir($path.$_REQUEST['pathext'].$file)) 
+		if(is_dir($path.$_REQUEST['workingdir'].$file)) 
         {
-			$tempdir = @opendir($path.$_REQUEST['pathext'].$file);
+			$tempdir = @opendir($path.$_REQUEST['workingdir'].$file);
 			if($tempdir == false) { $hiddendir = 1;}
 			@closedir($tempdir);
 		}
@@ -383,7 +371,7 @@ else
 			if($match === false) 
             { 
                 // get some info about the file
-				$filedata = stat($path.$_REQUEST['pathext'].$file); 
+				$filedata = stat($path.$_REQUEST['workingdir'].$file); 
 				$encodedfile = rawurlencode($file);
 				
 				$showEdit = false;
@@ -393,7 +381,7 @@ else
 				
                 // find out if the file is one that can be edited
                 // if the edit function is turned on and the file is not a directory
-                if($editon === true && !is_dir($path.$_REQUEST['pathext'].$file)) 
+                if($editon === true && !is_dir($path.$_REQUEST['workingdir'].$file)) 
                 { 
 					$dotpos = strrpos($file,'.');
 					foreach($editextensions as $editext) 
@@ -409,7 +397,7 @@ else
 
 
                 // if it is a directory change the file name to a directory link
-                if(is_dir($path.$_REQUEST['pathext'].$file)) 
+                if(is_dir($path.$_REQUEST['workingdir'].$file)) 
                 {
 					$isFolder = true;
 					$fileicontypeCSS = $foldericonCSS;
@@ -512,7 +500,24 @@ else
 
 function start()
 {
-    global $ini;
+    global $ini, $_REQUEST, $_GET;
+
+    if(strpos($_REQUEST['workingdir'],'..') !== false) 
+    {
+        renderAntiTemperingView();
+    }
+    if(strpos($_REQUEST['delete'],'..') !== false) 
+    {
+        renderAntiTemperingView();
+    }
+    if(strpos($_REQUEST['delete'],'/') !== false) 
+    {
+	    renderAntiTemperingView();
+    }
+    if(strpos($_GET['edit'],'..') !== false) 
+    {
+        renderAntiTemperingView();
+    }
     
     session_start();
             
@@ -636,6 +641,15 @@ function renderMain($tmplData)
     
     $tmplData['{{content}}'] = Template::render($ini['mainTemplate'], $tmplData);
     Template::display($ini['layoutTemplate'], $tmplData);    
+}
+
+function renderAntiTemperingView()
+{
+    global $tmplData;
+    
+    error($tmplData, "Detected tampering of data. Stop it!!");
+    renderLogin($tmplData);
+    exit;
 }
 
 //-----------------------------------------------------------------------------
