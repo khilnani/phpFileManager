@@ -42,7 +42,17 @@
 <a name="phpfilemanager" class="anchor" href="#phpfilemanager"><span class="octicon octicon-link"></span></a><em>phpFileManager</em>
 </h1>
 
-<p>A web based file manager with the features below built using Php</p>
+<p>Just like the in the 1990s, everyone needs a good web file manager that does not rely on a silly MySQL database. </p>
+
+<p>Especially useful for situations when you need a quick and simple web admin for an arbitary 
+folder on your website when FTP or SSH is not available/ desired, have friends who are not tech-savy, or simply do not 
+trust any server but your own to store/share your files.</p>
+
+<p>This was also a way for me to play with the <a href="https://github.com/laravel/laravel">Laravel</a> framework. 
+And lastly, the application intentionally uses minimum JavaScript. Not because JQuery isn't cool anymore. But because its
+not really needed.</p>
+
+<p>The web based file manager with the features below built using Php</p>
 
 <ul>
 <li>Password/authentication. <em>Can be configured to be enabled/disabled.</em>
@@ -63,6 +73,12 @@
 <li>Simple User friendly interface - Clear error and success confirmation messages.</li>
 <li>User customizable interface - HTML and CSS is organized into HTML templates that can be customized without editing Php.</li>
 </ul><h1>
+<a name="upcoming-features" class="anchor" href="#upcoming-features"><span class="octicon octicon-link"></span></a>Upcoming Features</h1>
+
+<p>Take a look at <a href="https://github.com/khilnani/phpFileManager/issues?state=open">Github Issues</a> to learn more about 
+features i'm considering. Feel free to make suggestions or post bugs.</p>
+
+<h1>
 <a name="setup" class="anchor" href="#setup"><span class="octicon octicon-link"></span></a>Setup</h1>
 
 <ul>
@@ -100,11 +116,12 @@
 
 <ul>
 <li>NEW: Externalized configuration options to <code>config.ini</code>.</li>
-<li>NEW: Added ability to customize the base content directory that will be  managed.</li>
-<li>NEW: Externalized 905 of html into templates. Also improvement general formatting.</li>
+<li>NEW: Added ability to customize the base content directory that will be managed.</li>
+<li>NEW: Externalized  html/css into templates. Also improvemd general formatting and pretty icons.</li>
 <li>NEW: Added capability to unzip uploaded Zip files.</li>
 <li>UPDATE: Improved Error messaging. Added Success messaging.</li>
-<li>UPDATE: Converted images to base64 and embedded in index.php.</li>
+<li>REVERTED: Added images back in. <del>UPDATE: Converted images to base64 and embedded in index.php</del>
+</li>
 <li>UPDATE: Improved directory and file name validation as well as case sensitivity.</li>
 <li>NEW: Added a JavaScript confirmation popup when unzipping, deleting files/folders.</li>
 </ul><h1>
@@ -129,6 +146,16 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.</p>
 
     </div>
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-    
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-24322958-3");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
   </body>
 </html>
