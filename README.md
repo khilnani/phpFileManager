@@ -5,7 +5,7 @@ Just like the in the 1990s, everyone needs a good web file manager that does not
 
 Especially useful for situations when you need a quick and simple web admin for an arbitary 
 folder on your website when FTP or SSH is not available/ desired, have friends who are not tech-savy, or simply do not 
-trust any server but your own to store your files.
+trust any server but your own to store/share your files.
 
 This was also a way for me to play with the [Laravel](https://github.com/laravel/laravel) framework.
 
@@ -22,6 +22,12 @@ The web based file manager with the features below built using Php
 - Configurable idden files. Ability to specify files that should not be displayed. _Can be configured to be enabled/disabled._
 - Simple User friendly interface - Clear error and success confirmation messages.
 - User customizable interface - HTML and CSS is organized into HTML templates that can be customized without editing Php.
+
+Upcoming Features
+---------------
+
+Take a look at [Github Issues](https://github.com/khilnani/phpFileManager/issues?state=open) to learn more about 
+features i'm considering. Feel free to make suggestions or post bugs.
 
 Setup
 ===============
