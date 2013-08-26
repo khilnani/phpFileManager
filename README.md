@@ -24,7 +24,7 @@ The web based file manager with the features below built using Php
 - User customizable interface - HTML and CSS is organized into HTML templates that can be customized without editing Php.
 
 Upcoming Features
----------------
+===============
 
 Take a look at [Github Issues](https://github.com/khilnani/phpFileManager/issues?state=open) to learn more about 
 features i'm considering. Feel free to make suggestions or post bugs.
