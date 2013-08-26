@@ -76,7 +76,7 @@ History
 - NEW: Externalized 905 of html into templates. Also improvement general formatting.
 - NEW: Added capability to unzip uploaded Zip files.
 - UPDATE: Improved Error messaging. Added Success messaging.
-- UPDATE: Converted images to base64 and embedded in index.php.
+- REVERTED: Added images back in. ~~UPDATE: Converted images to base64 and embedded in index.php~~
 - UPDATE: Improved directory and file name validation as well as case sensitivity.
 - NEW: Added a JavaScript confirmation popup when unzipping, deleting files/folders.
 
