@@ -72,8 +72,8 @@ Screenshots
 History
 ===============
 - NEW: Externalized configuration options to `config.ini`.
-- NEW: Added ability to customize the base content directory that will be  managed.
-- NEW: Externalized 905 of html into templates. Also improvement general formatting.
+- NEW: Added ability to customize the base content directory that will be managed.
+- NEW: Externalized  html/css into templates. Also improvemd general formatting and pretty icons.
 - NEW: Added capability to unzip uploaded Zip files.
 - UPDATE: Improved Error messaging. Added Success messaging.
 - REVERTED: Added images back in. ~~UPDATE: Converted images to base64 and embedded in index.php~~
