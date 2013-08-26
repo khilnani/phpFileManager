@@ -34,6 +34,14 @@ span.text {
     font-weight: normal;
     color: #333333;
 }
+span.tip {
+    font-family : Verdana, Arial;
+    font-size : 12px;
+    font-weight: normal;
+    font-style:italic;
+    color: #666666;
+    /*float: right;*/
+}
 span.error {
     text-align:center;
     display: block;
@@ -182,13 +190,6 @@ a:active {
     font-family : Verdana, Arial;
     font-size : 13px;
     text-decoration:none;
-}
-.textarea_old {
-    width:90%;
-    height: 600px;
-    padding: 10px;
-    margin: 10px;
-    border: 1px solid #ccc;
 }
 .textarea {
     width: 10px;

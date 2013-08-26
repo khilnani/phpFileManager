@@ -1,9 +1,9 @@
 <form name='mainForm' id='mainForm' method='post' action='{{action}}'>
-    <center>
-        <span class='label text'>Edit: '{{workingdir}}{{editingFile}}'</span>
-    </center>
-    <br />
-    <pre id="editor"></pre>
+<center>
+<span class='label text'>File: '{{workingdir}}{{editingFile}}'</span>
+</center>
+    <br />    
+    <pre id="editor"></pre>    
     <center>
         <br />
         <br />
@@ -16,6 +16,13 @@
     <textarea name='newcontent' id='newcontent' class='textarea'>{{oldcontent}}</textarea>
 </form>
 
+<br />
+<center>        
+<span class='tip'>
+<strong>Keyboard Shortcuts:</strong> <br/>
+Save: CTL-S, Goto: CTL-L, Find: CTL-F, Next: CTL-G, Prev: CTL-SHFT-G. Del Line: CTL-D, Line Start/End: CTL-Left/Right. <a href="https://github.com/ajaxorg/ace/wiki/Default-Keyboard-Shortcuts" target="_blank">More?</a>
+</span>
+</center>
 <script src="bower_components/jquery/jquery.min.js" type="text/javascript"
 charset="utf-8"></script>
 <script src="bower_components/ace-builds/src-min/ace.js" type="text/javascript"
