@@ -1,11 +1,11 @@
 _phpFileManager_
 ================
 
-Just like the in the 1990s, everyone needs a good web file manager. 
+Just like the in the 1990s, everyone needs a good web file manager that does not rely on a silly MySQL database. 
 
-Especially useful for cases where you need quick and dirty web file admin for an arbitary folder on a website
-to share photos with friends who are not familiar with FTP or UX designers who are not familiar with FTP 
-but need a place to post Axure prototypes.
+Especially useful for situations when you need a quick and simple web admin for an arbitary 
+folder on your website when FTP or SSH is not available/ desired, have friends who are not tech-savy, or simply do not 
+trust any server but your own to store your files.
 
 This was also a way for me to play with the [Laravel](https://github.com/laravel/laravel) framework.
 
