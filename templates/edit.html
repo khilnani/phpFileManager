@@ -1,14 +1,14 @@
 <form name='mainForm' id='mainForm' method='post' action='{{action}}'>
 <center>
-<span class='label text'>File: '{{workingdir}}{{editingFile}}'</span>
+<span class='label text'>File: '<span id="fileName">{{workingdir}}{{editingFile}}</span>'</span>
 </center>
     <br />    
     <pre id="editor"></pre>    
     <center>
         <br />
         <br />
-        <input type='submit' name='save' value='Save' />
-        <input type='submit' name='cancel' value='Cancel' />
+        <input type='submit' name='save' id="save" value='Save' />
+        <input type='submit' name='cancel' id="cancel" value='Cancel' />
         <input type='hidden' name='username' value='{{username}}' />
         <input type='hidden' name='savefile' value='{{editingFile}}' />
         <input type='hidden' name='workingdir' value='{{workingdir}}' />
@@ -20,7 +20,7 @@
 <center>        
 <span class='tip'>
 <strong>Keyboard Shortcuts:</strong> <br/>
-<b>Save:</b> CTL-S, <b>Goto:</b> CTL-L, <b>Find:</b> CTL-F, <b>Next:</b> CTL-G, <b>Prev:</b> CTL-SHFT-G. <b>Del Line:</b> CTL-D, <b>Line Start/End:</b> CTL-Left/Right. <a href="https://github.com/ajaxorg/ace/wiki/Default-Keyboard-Shortcuts" target="_blank">More?</a>
+<!-- <b>Save:</b> CTL-S, --><b>Goto:</b> CTL-L, <b>Find:</b> CTL-F, <b>Next:</b> CTL-G, <b>Prev:</b> CTL-SHFT-G. <b>Del Line:</b> CTL-D, <b>Line Start/End:</b> CTL-Left/Right. <a href="https://github.com/ajaxorg/ace/wiki/Default-Keyboard-Shortcuts" target="_blank">More?</a>
 </span>
 </center>
 <script src="bower_components/jquery/jquery.min.js" type="text/javascript"
