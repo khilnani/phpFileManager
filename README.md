@@ -70,6 +70,7 @@ Screenshots
 
 History
 ===============
+- NEW: Integrated the ACE Editor (http://ace.c9.io).
 - NEW: Externalized configuration options to `config.ini`.
 - NEW: Added ability to customize the base content directory that will be managed.
 - NEW: Externalized  html/css into templates. Also improvemd general formatting and pretty icons.
