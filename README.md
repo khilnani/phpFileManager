@@ -18,10 +18,10 @@ The web based file manager with the features below built using Php
 - Ability to unzip ZIP files to a desired folder.
 - Folder creation. _Can be configured to be enabled/disabled._
 - Folder deletion. _Can delete folders that are not empty._
-- Customizable directory path
+- Customizable directory path.
 - Rename files.
-- Edit files. Ability to specify which files can be edited. _Can be configured to be enabled/disabled._
-- Configurable idden files. Ability to specify files that should not be displayed. _Can be configured to be enabled/disabled._
+- Edit files using the pretty amazing ACE Editor (http://ace.c9.io). Ability to specify which files can be edited. _Editing can be configured to be enabled/disabled._
+- Configurable hidden files. Ability to specify files that should not be displayed. _Can be configured to be enabled/disabled._
 - Simple User friendly interface - Clear error and success confirmation messages.
 - User customizable interface - HTML and CSS is organized into HTML templates that can be customized without editing Php.
 

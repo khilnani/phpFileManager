@@ -1,8 +1,10 @@
-<form name='mainForm' method='post' action='{{action}}'>
+<form name='mainForm' id='mainForm' method='post' action='{{action}}'>
     <center>
         <span class='label text'>Edit: '{{workingdir}}{{editingFile}}'</span>
-        <br />
-        <textarea name='newcontent' class='textarea'>{{oldcontent}}</textarea>
+    </center>
+    <br />
+    <pre id="editor"></pre>
+    <center>
         <br />
         <br />
         <input type='submit' name='save' value='Save' />
@@ -11,4 +13,12 @@
         <input type='hidden' name='savefile' value='{{editingFile}}' />
         <input type='hidden' name='workingdir' value='{{workingdir}}' />
     </center>
+    <textarea name='newcontent' id='newcontent' class='textarea'>{{oldcontent}}</textarea>
 </form>
+
+<script src="bower_components/jquery/jquery.min.js" type="text/javascript"
+charset="utf-8"></script>
+<script src="bower_components/ace-builds/src-min/ace.js" type="text/javascript"
+charset="utf-8"></script>
+<script src="js/ace-modeList.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/ace.js" type="text/javascript" charset="utf-8"></script>
