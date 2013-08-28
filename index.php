@@ -245,6 +245,32 @@ else
 			}
 		}
 	} 
+	
+    //-----------------------------------------------------------------------------
+    // ACTION: Directory Zip
+    //-----------------------------------------------------------------------------
+    if($_GET['zip'] != '') 
+    {
+        if( file_exists($path.$_REQUEST['workingdir'].$_GET['zip']) == false ) 
+	    {
+			error($tmplData, "Unable zip '" . $_GET['newname'] . "'. Directory '" . $_GET['newname'] . "' does not exist.");
+		}
+		elseif( file_exists($path.$_REQUEST['workingdir'].$_GET['newname']) )
+        {
+            error($tmplData, "The file '" . $_GET['newname'] . "' already exists. Please select a new file name.");
+        }
+        else
+        {
+			 if (zipDirectory( $path.$_REQUEST['workingdir'].$_GET['zip'], $path.$_REQUEST['workingdir'].$_GET['newname'] )) 
+            {
+				success($tmplData, "'" . $_GET['zip'] . "/' successfully zipped to '" . $_GET['newname'] . "'.");
+			}
+            else
+            {
+				error($tmplData, "'" . $_GET['zip'] . "/' could not be zipped to '" . $_GET['newname'] . "'.");
+			}
+        }
+    }
     
     //-----------------------------------------------------------------------------
     // ACTION: File unzip
@@ -378,6 +404,7 @@ else
     			$showView = true;
 				$showDelete = true;
                 $showUnzip = false;
+                $showZip = false;
 				
                 // find out if the file is one that can be edited
                 // if the edit function is turned on and the file is not a directory
@@ -411,6 +438,7 @@ else
 					}
 					$showEdit = false;
                     $showView = false;
+                    $showZip = true;
 				}
                 else 
                 {
@@ -467,9 +495,11 @@ else
 				// append 2 table rows to the $content variable, the first row has the file
 				// informtation, the 2nd row makes a black line 1 pixel high
                         
+                        
                 $tmplData['{{fileicontypeCSS}}'] = $fileicontypeCSS;
                 $tmplData['{{filename}}'] = $file;                 
                 $tmplData['{{isFolder}}'] = ($isFolder) ? $showCSS : $hideCSS;
+                $tmplData['{{showZip}}'] = ($showZip) ? $showCSS : $hideCSS;
                 $tmplData['{{isFile}}'] = ($isFolder) ? $hideCSS : $showCSS;
                 $tmplData['{{encodedfile}}'] = $encodedfile;
                 $tmplData['{{filetype}}'] = $filetype;
@@ -595,6 +625,51 @@ function rrmdir($dir)
     }
     
     return true;
+}
+
+function zipDirectory($source, $destination)
+{
+    if (!extension_loaded('zip') || !file_exists($source)) {
+        return false;
+    }
+
+    $zip = new ZipArchive();
+    if (!$zip->open($destination, ZIPARCHIVE::CREATE)) {
+        return false;
+    }
+
+    $source = str_replace('\\', '/', realpath($source));
+
+    if (is_dir($source) === true)
+    {
+        $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($source), RecursiveIteratorIterator::SELF_FIRST);
+
+        foreach ($files as $file)
+        {
+            $file = str_replace('\\', '/', $file);
+
+            // Ignore "." and ".." folders
+            if( in_array(substr($file, strrpos($file, '/')+1), array('.', '..')) )
+                continue;
+
+            $file = realpath($file);
+
+            if (is_dir($file) === true)
+            {
+                $zip->addEmptyDir(str_replace($source . '/', '', $file . '/'));
+            }
+            else if (is_file($file) === true)
+            {
+                $zip->addFromString(str_replace($source . '/', '', $file), file_get_contents($file));
+            }
+        }
+    }
+    else if (is_file($source) === true)
+    {
+        $zip->addFromString(basename($source), file_get_contents($source));
+    }
+
+    return $zip->close();
 }
 
 //-----------------------------------------------------------------------------
