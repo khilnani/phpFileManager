@@ -49,10 +49,10 @@ Setup
                 \*.js
         \css
                 \styles.css
-        \views
-                \*.html
         \app
                 \*.php
+                \views
+                    \*.html
         \bower_components
                 \*
         
