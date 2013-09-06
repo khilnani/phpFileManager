@@ -7,7 +7,6 @@ Especially useful for situations when you need a quick and simple web admin for 
 folder on your website when FTP or SSH is not available/ desired, have friends who are not tech-savy, or simply do not 
 trust any server but your own to store/share your files.
 
-This was also a way for me to play with the [Laravel](https://github.com/laravel/laravel) framework. 
 And lastly, the application intentionally uses the minimum amount of JavaScript needed, only where really valuable. 
 
 The web based file manager with the features below built using Php
