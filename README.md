@@ -42,16 +42,21 @@ Setup
 
 ```
  \admin
-       \index.php
-       \config.ini
-       \css
-           \styles.css
-       \templates
-                   \edit.html
-                   \layout.html
-                   \main.html
-                   \main-row.html
-                   \edit.html
+        \index.php
+        \config.ini
+        \images
+                \*.gif
+        \js
+                \*.js
+        \css
+                \styles.css
+        \views
+                \*.html
+        \classes
+                \*.php
+        \bower_components
+                \*
+        
  \content
          \... (directory to be managed)
 ```
