@@ -52,7 +52,7 @@ Setup
                 \styles.css
         \views
                 \*.html
-        \classes
+        \application
                 \*.php
         \bower_components
                 \*
