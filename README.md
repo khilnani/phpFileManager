@@ -32,7 +32,10 @@ features i'm considering. Feel free to make suggestions or post bugs.
 Setup
 ===============
 
-- Copy files to a dedicated directory (eg. `\admin\`) on an Apache server with Php configured.
+- Checkout the git repository for phpFileManager
+- Install Bower by running `npm install -g bower`
+- In the git repo folder for phpFileManager, run `bower install`
+- Copy files from phpFileManager to a dedicated directory (eg. `\admin\`) on an Apache server with Php configured.
 - `chmod 666` `config.ini` and the files in `\templates\`.
 - `chmod 755 index.php`.
 - Update configuration properties in `config.ini`.
