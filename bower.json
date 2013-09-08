@@ -21,5 +21,11 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "ace-builds": "1.1.1",
+    "jquery": "2.0.3"
+  }
 }
+
+
