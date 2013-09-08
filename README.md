@@ -63,6 +63,10 @@ Setup
          \... (directory to be managed)
 ```
 
+Thanks To
+=========
+- https://c9.io
+
 
 Screenshots
 =========
