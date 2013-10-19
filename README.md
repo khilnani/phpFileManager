@@ -60,8 +60,8 @@ Sample directory structure
         \bower_components
                 \*
         
- \content
-         \... (directory to be managed)
+ \content (directory to be managed)
+         \... 
 ```
 
 
