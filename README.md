@@ -35,12 +35,13 @@ Setup
 - Checkout the git repository for phpFileManager
 - Install Bower by running `npm install -g bower`
 - In the git repo folder for phpFileManager, run `bower install`
-- Copy files from phpFileManager to a dedicated directory (eg. `\admin\`) on an Apache server with Php configured.
-- `chmod 666` `config.ini` and the files in `\templates\`.
+- Copy files from phpFileManager to a dedicated directory (eg. `\admin\`) on an Apache HTTPD server with Php configured.
+- `chmod 666` both `config.ini` and the files in `\templates\`.
 - `chmod 755 index.php`.
 - Update configuration properties in `config.ini`.
-- `chmod 777` the directory to be managed.
-- Sample directory structure
+- `chmod 777` the directory to be managed eg. `\content`.
+
+Sample directory structure
 
 ```
  \admin
