@@ -4,40 +4,30 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>phpFileManager by khilnani</title>
+
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/respond.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <!--[if lt IE 8]>
-    <link rel="stylesheet" href="stylesheets/ie.css">
-    <![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
   </head>
   <body>
-      <div id="header">
-        <nav>
-          <li class="fork"><a href="https://github.com/khilnani/phpFileManager">View On GitHub</a></li>
-          <li class="downloads"><a href="https://github.com/khilnani/phpFileManager/zipball/master">ZIP</a></li>
-          <li class="downloads"><a href="https://github.com/khilnani/phpFileManager/tarball/master">TAR</a></li>
-          <li class="title">DOWNLOADS</li>
-        </nav>
-      </div><!-- end header -->
-
     <div class="wrapper">
+      <header>
+        <h1>phpFileManager</h1>
+        <p>A Php based File Manager.</p>
 
+        <p class="view"><a href="https://github.com/khilnani/phpFileManager">View the Project on GitHub <small>khilnani/phpFileManager</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/khilnani/phpFileManager/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/khilnani/phpFileManager/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/khilnani/phpFileManager">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
       <section>
-        <div id="title">
-          <h1>phpFileManager</h1>
-          <p>A Php based File Manager.</p>
-          <hr>
-          <span class="credits left">Project maintained by <a href="https://github.com/khilnani">khilnani</a></span>
-          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
-        </div>
-
         <h1>
 <a name="phpfilemanager" class="anchor" href="#phpfilemanager"><span class="octicon octicon-link"></span></a><em>phpFileManager</em>
 </h1>
@@ -47,9 +37,6 @@
 <p>Especially useful for situations when you need a quick and simple web admin for an arbitary 
 folder on your website when FTP or SSH is not available/ desired, have friends who are not tech-savy, or simply do not 
 trust any server but your own to store/share your files.</p>
-
-<p>This was also a way for me to play with the <a href="https://github.com/laravel/laravel">Laravel</a> framework. 
-And lastly, the application intentionally uses the minimum amount of JavaScript needed, only where really valuable. </p>
 
 <p>The web based file manager with the features below built using Php</p>
 
@@ -81,28 +68,39 @@ features i'm considering. Feel free to make suggestions or post bugs.</p>
 <a name="setup" class="anchor" href="#setup"><span class="octicon octicon-link"></span></a>Setup</h1>
 
 <ul>
-<li>Copy files to a dedicated directory (eg. <code>\admin\</code>) on an Apache server with Php configured.</li>
+<li>Checkout the git repository for phpFileManager</li>
+<li>Install Bower by running <code>npm install -g bower</code>
+</li>
+<li>In the git repo folder for phpFileManager, run <code>bower install</code>
+</li>
+<li>Copy files from phpFileManager to a dedicated directory (eg. <code>\admin\</code>) on an Apache HTTPD server with Php configured.</li>
 <li>
-<code>chmod 666</code> <code>config.ini</code> and the files in <code>\templates\</code>.</li>
+<code>chmod 666</code> both <code>config.ini</code> and the files in <code>\templates\</code>.</li>
 <li>
 <code>chmod 755 index.php</code>.</li>
 <li>Update configuration properties in <code>config.ini</code>.</li>
 <li>
-<code>chmod 777</code> the directory to be managed.</li>
-<li>Sample directory structure</li>
-</ul><pre><code> \admin
-       \index.php
-       \config.ini
-       \css
-           \styles.css
-       \templates
-                   \edit.html
-                   \layout.html
-                   \main.html
-                   \main-row.html
-                   \edit.html
- \content
-         \... (directory to be managed)
+<code>chmod 777</code> the directory to be managed eg. <code>\content</code>.</li>
+</ul><p>Sample directory structure</p>
+
+<pre><code> \admin
+        \index.php
+        \config.ini
+        \images
+                \*.gif
+        \js
+                \*.js
+        \css
+                \styles.css
+        \app
+                \*.php
+                \views
+                    \*.html
+        \bower_components
+                \*
+
+ \content (directory to be managed)
+         \... 
 </code></pre>
 
 <h1>
@@ -114,9 +112,10 @@ features i'm considering. Feel free to make suggestions or post bugs.</p>
 <a name="history" class="anchor" href="#history"><span class="octicon octicon-link"></span></a>History</h1>
 
 <ul>
+<li>NEW: Integrated the ACE Editor (<a href="http://ace.c9.io">http://ace.c9.io</a>).</li>
 <li>NEW: Externalized configuration options to <code>config.ini</code>.</li>
 <li>NEW: Added ability to customize the base content directory that will be managed.</li>
-<li>NEW: Externalized  html/css into templates. Also improvemd general formatting and pretty icons.</li>
+<li>NEW: Externalized  html/css into templates. Also improved general formatting and pretty icons.</li>
 <li>NEW: Added capability to unzip uploaded Zip files.</li>
 <li>UPDATE: Improved Error messaging. Added Success messaging.</li>
 <li>REVERTED: Added images back in. <del>UPDATE: Converted images to base64 and embedded in index.php</del>
@@ -142,9 +141,12 @@ GNU General Public License for more details.</p>
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.</p>
       </section>
-
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/khilnani">khilnani</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
     </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script src="javascripts/scale.fix.js"></script>
               <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
