@@ -1,3 +1,12 @@
+**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
+
+- [_phpFileManager_](#_phpfilemanager_)
+- [Upcoming Features](#upcoming-features)
+- [Setup](#setup)
+- [Screenshots](#screenshots)
+- [History](#history)
+- [License](#license)
+
 _phpFileManager_
 ================
 
